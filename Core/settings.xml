@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<TestRunParameters>
+		<Parameter name="Authorization" value="00D8e000000RWWC!AQgAQOXLd3oixiLhwzkZ5EO33d.R0jK82Xmif9vEAsCZtC0e3qfrXF2bcYdWc2YbC4r73dCJeiLPv8eqPGQfzKLp7H5jXuEL" />
+		<Parameter name="Url" value="https://ozatvn2-dev-ed.develop.my.salesforce.com" />
+		<Parameter name="Username" value="gopad74116@onlcool.com" />
+	</TestRunParameters>
+</RunSettings>
