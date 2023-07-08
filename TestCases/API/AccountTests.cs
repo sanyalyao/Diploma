@@ -1,16 +1,24 @@
-﻿using DiplomaAPI.Tests;
+﻿using BussinesObject.API.Helpers;
+using BussinesObject.API.Models;
+using DiplomaAPI.Tests;
 using NUnit.Framework;
 
 namespace TestCases.API
 {
-    public class AccountTests : BaseTest
+    public class AccountTests : TestBase
     {
         [Test]
-        public void RequestTest()
+        public void CreateNewAccount()
         {
-            var accounts = accountService.GetAccounts();
+            AccountModel newAccount = new Generator().GenerateNewAccount();
 
-            Console.WriteLine(accounts[0].Name);
+            accountServiceSteps.CreateNewAccountSteps(newAccount);
+        }
+
+        [Test]
+        public void DeleteAccount()
+        {
+
         }
     }
 }
