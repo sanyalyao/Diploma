@@ -3,7 +3,7 @@ using BussinesObject.API.Services;
 using BussinesObject.API.ServicesSteps;
 using NUnit.Framework;
 
-namespace DiplomaAPI.Tests
+namespace TestCases.API
 {
     public class TestBase : BaseApiTest
     {

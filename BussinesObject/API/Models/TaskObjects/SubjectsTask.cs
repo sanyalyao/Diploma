@@ -1,4 +1,4 @@
-﻿namespace BussinesObject.API.Models
+﻿namespace BussinesObject.API.Models.TaskObjects
 {
     public enum subject
     {

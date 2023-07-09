@@ -1,10 +1,9 @@
 ﻿using Core.RestCore;
-using BusinessObject.API.Services;
-using BussinesObject.API.Models;
 using BussinesObject.API.Models.SuccessResponses;
 using NUnit.Framework;
 using BussinesObject.API.Models.TaskData;
 using BussinesObject.API.Services;
+using BussinesObject.API.Models.TaskObjects;
 
 namespace BussinesObject.API.ServicesSteps
 {
@@ -30,11 +29,19 @@ namespace BussinesObject.API.ServicesSteps
         {
             List<string> oldTasks = TaskService.GetTasks().Select(task => task.Id).ToList();
 
-            TaskService.DeleteTask(task);
+            var response = TaskService.DeleteTask(task);
 
             List<string> newTasks = TaskService.GetTasks().Select(task => task.Id).ToList();
 
+            Assert.IsTrue(response.IsSuccessStatusCode);
             Assert.AreEqual(oldTasks.Count - 1, newTasks.Count);
+        }
+
+        public void EditTaskSteps(RecentItem oldTask, TaskModel newTask)
+        {
+            var response = TaskService.EditTask(oldTask, newTask);
+
+            Assert.IsTrue(response.IsSuccessStatusCode);
         }
     }
 }

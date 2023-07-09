@@ -1,6 +1,5 @@
-﻿using BussinesObject.API.Models;
-using BussinesObject.API.Models.TaskData;
-using DiplomaAPI.Tests;
+﻿using BussinesObject.API.Models.TaskData;
+using BussinesObject.API.Models.TaskObjects;
 using NUnit.Framework;
 
 namespace TestCases.API
@@ -15,7 +14,7 @@ namespace TestCases.API
                 Subject = taskService.GetSubject(subject.SendLetter),
             };
 
-            taskService.CreateNewTask(newTask);
+            taskServiceSteps.CreateNewTaskSteps(newTask);
         }
 
         [Test]
@@ -27,7 +26,14 @@ namespace TestCases.API
         [Test]
         public void EditTask()
         {
+            TaskModel newTask = new TaskModel()
+            {
+                Subject = taskService.GetSubject(subject.SendLetter),
+                Status = taskService.GetStatus(status.Completed),
+            };
+            RecentItem oldTask = taskService.GetTasks()[0];
 
+            taskServiceSteps.EditTaskSteps(oldTask, newTask);
         }
     }
 }

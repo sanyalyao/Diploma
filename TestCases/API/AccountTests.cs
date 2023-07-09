@@ -1,6 +1,5 @@
 ﻿using BussinesObject.API.Helpers;
 using BussinesObject.API.Models;
-using DiplomaAPI.Tests;
 using NUnit.Framework;
 
 namespace TestCases.API
