@@ -3,7 +3,7 @@ using Core.RunSettings;
 using NUnit.Framework;
 
 
-namespace DiplomaAPI.Tests
+namespace TestCases.API
 {
     public class BaseApiTest : SetUpSettings
     {
