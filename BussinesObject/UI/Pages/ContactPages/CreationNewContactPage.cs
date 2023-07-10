@@ -4,7 +4,7 @@ using BussinesObject.UI.Models;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace BussinesObject.UI.Pages
+namespace BussinesObject.UI.Pages.ContactPages
 {
     public class CreationNewContactPage : GeneralContractPage
     {

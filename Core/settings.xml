@@ -4,5 +4,6 @@
 		<Parameter name="Authorization" value="00D8e000000RWWC!AQgAQDCs_fb7ygbQQq3SBqaVfQ6FD.8N2W2khPngaDe3h0D3iPIUp.jXYbRu13ZugLoP7yXRWBQTQjkX9jaNOnyPJHVDTNFT" />
 		<Parameter name="Url" value="https://ozatvn2-dev-ed.develop.my.salesforce.com" />
 		<Parameter name="Username" value="gopad74116@onlcool.com" />
+		<Parameter name="Password" value="gerUHY456"/>
 	</TestRunParameters>
 </RunSettings>

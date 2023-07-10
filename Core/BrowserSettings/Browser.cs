@@ -1,5 +1,7 @@
-﻿using OpenQA.Selenium;
+﻿using Core.DriverSettings;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using System.Drawing;
 
 namespace Core.BrowserSettings
 {
@@ -24,12 +26,10 @@ namespace Core.BrowserSettings
 
         private Browser()
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.SetPreference("dom.webnotifications.enabled", false);
-            options.AddArgument("--headless");
-            driver = new FirefoxDriver(options);
+            driver = new DriverFactory().GetFirefoxDriver();
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Maximize();
+            driver.Manage().Window.Size = new Size(1920, 1080);
         }
 
         public void CloseBrowser()

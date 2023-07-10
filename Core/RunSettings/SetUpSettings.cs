@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using OpenQA.Selenium;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Core.RunSettings
@@ -8,6 +9,7 @@ namespace Core.RunSettings
         protected string url;
         protected string accessToken;
         protected string username;
+        protected string password;
 
         public SetUpSettings()
         {
@@ -18,6 +20,7 @@ namespace Core.RunSettings
                 accessToken = settings.TestRunParameters.Parameter.Where(parameter => parameter.Name == "Authorization").First().Value;
                 url = settings.TestRunParameters.Parameter.Where(parameter => parameter.Name == "Url").First().Value;
                 username = settings.TestRunParameters.Parameter.Where(parameter => parameter.Name == "Username").First().Value;
+                password = settings.TestRunParameters.Parameter.Where(parameter => parameter.Name == "Password").First().Value;
             }
         }
     }

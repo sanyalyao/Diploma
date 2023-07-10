@@ -25,5 +25,12 @@ namespace BussinesObject.UI.Elements
 
             return driver.FindElement(locator);
         }
+
+        public List<IWebElement> GetElements()
+        {
+            WaitHelper.WaitElement(driver, locator);
+
+            return driver.FindElements(locator).ToList();
+        }
     }
 }

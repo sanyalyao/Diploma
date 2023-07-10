@@ -4,7 +4,7 @@ using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace BussinesObject.UI.Pages
+namespace BussinesObject.UI.Pages.AccountPages
 {
     public class CreationNewAccountPage : GeneralAccountPage
     {

@@ -1,5 +1,6 @@
 ﻿using Faker;
 using BussinesObject.UI.Models;
+using BussinesObject.UI.Models.EnumObjects;
 
 namespace BussinesObject.UI.Helpers
 {
@@ -34,6 +35,20 @@ namespace BussinesObject.UI.Helpers
             ContactModel contact = new ContactModel(firstname, lastname, mobile, email, street, zip, city, country);
 
             return contact;
+        }
+
+        public static GroupModel CreateGroup(accessTypes accessTypes) 
+        {
+            string groupName = Company.Name();
+            var accessType = GroupHelper.GetAccessTypes(accessTypes);
+
+            GroupModel newGroup = new GroupModel()
+            {
+                Name = groupName,
+                AccessType = accessType,
+            };
+
+            return newGroup;
         }
     }
 }
