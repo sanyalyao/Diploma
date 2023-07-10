@@ -1,7 +1,7 @@
 ﻿using BussinesObject.UI.Elements;
 using OpenQA.Selenium;
 
-namespace BussinesObject.UI.Pages
+namespace BussinesObject.UI.Pages.ContactPages
 {
     public class GeneralContractPage : BasePage
     {

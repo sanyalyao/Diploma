@@ -4,7 +4,7 @@ using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
-namespace BussinesObject.UI.Pages
+namespace BussinesObject.UI.Pages.AccountPages
 {
     public class AccountPage : GeneralAccountPage
     {
@@ -83,7 +83,7 @@ namespace BussinesObject.UI.Pages
             string accountNumber = driver.FindElements(accountAccountNumberField).Count == 1 ?
                 driver.FindElement(accountAccountNumberField).Text
                 : "";
-            string address = driver.FindElements(addressField).Count == 1 ? 
+            string address = driver.FindElements(addressField).Count == 1 ?
                 driver.FindElement(addressField).GetAttribute("aria-label").Replace("\r\n", "").Replace(" ", "")
                 : "";
 

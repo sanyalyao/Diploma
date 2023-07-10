@@ -3,7 +3,7 @@ using BussinesObject.UI.Helpers;
 using BussinesObject.UI.Models;
 using OpenQA.Selenium;
 
-namespace BussinesObject.UI.Pages
+namespace BussinesObject.UI.Pages.AccountPages
 {
     public class AccountsPage : GeneralAccountPage
     {

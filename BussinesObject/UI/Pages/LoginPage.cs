@@ -1,6 +1,6 @@
 ﻿using BussinesObject.UI.Elements;
-using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
+using BussinesObject.UI.Models;
 using OpenQA.Selenium;
 
 namespace BussinesObject.UI.Pages
@@ -21,15 +21,13 @@ namespace BussinesObject.UI.Pages
             return this;
         }
 
-        public ProfilePage LogIn(UserModel user)
+        public void LogIn(UserModel user)
         {
             usernameInput.GetElement().SendKeys(user.Username);
             passwordInput.GetElement().SendKeys(user.Password);
             buttonLogin.GetElement().Click();
 
             WaitHelper.WaitElement(driver, titleHomeBy);
-
-            return new ProfilePage().GoToProfilePage();
         }
     }
 }
