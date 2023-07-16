@@ -1,11 +1,11 @@
 ﻿using Core.DriverSettings;
+using Core.RunSettings;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
 using System.Drawing;
 
 namespace Core.BrowserSettings
 {
-    public class Browser
+    public class Browser : SetUpSettings
     {
         private static Browser instance = null;
         private IWebDriver driver;
@@ -28,8 +28,8 @@ namespace Core.BrowserSettings
         {
             driver = new DriverFactory().GetFirefoxDriver();
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Size = new Size(1920, 1080);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeouts);
+            driver.Manage().Window.Size = new Size(windowSizeWidth, windowSizeHeight);
         }
 
         public void CloseBrowser()

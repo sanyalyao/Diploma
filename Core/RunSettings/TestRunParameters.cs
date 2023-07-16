@@ -5,8 +5,10 @@ namespace Core.RunSettings
     [XmlRoot(ElementName = "TestRunParameters")]
     public class TestRunParameters
     {
+        [XmlElement(ElementName = "Authorization")]
+        public Authorization Authorization { get; set; }
 
-        [XmlElement(ElementName = "Parameter")]
-        public List<Parameter> Parameter { get; set; }
+        [XmlElement(ElementName = "BrowserSettings")]
+        public BrowserSettings BrowserSettings { get; set; }
     }
 }

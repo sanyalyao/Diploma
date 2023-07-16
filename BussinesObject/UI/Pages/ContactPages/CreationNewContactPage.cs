@@ -11,9 +11,11 @@ namespace BussinesObject.UI.Pages.ContactPages
         private static By newContactBy = By.CssSelector("a[title='New']");
         private By newContactTitle = By.CssSelector("h2[class='slds-modal__title slds-hyphenate slds-text-heading--medium']");
 
+        private PushMessage errorPushMessageTitle = new PushMessage (By.CssSelector("div[class='uiPanel--default uiPanel positioned north forceFormPageError slds-popover slds-popover_error open active'] *> div[class='panel-header'] *> h2[title='We hit a snag.']")); 
+
         private Button newContactButton = new Button(newContactBy);
 
-        public ContactPage CreateNewContact(ContactModel contact)
+        public CreationNewContactPage CreateNewContact(ContactModel contact)
         {
             Actions action = new Actions(driver);
 
@@ -33,11 +35,23 @@ namespace BussinesObject.UI.Pages.ContactPages
             mailingCityInput.GetElement().SendKeys(contact.MailingCity);
             mailingCountryInput.GetElement().SendKeys(contact.MailingCountry);
 
+            return this;
+        }
+
+        public ContactPage ConfirmCreationNewContact()
+        {
             saveNewContactButton.GetElement().Click();
 
             WaitHelper.WaitElement(driver, contactNameTitleBy);
 
             return new ContactPage();
+        }
+
+        public IWebElement CheckIfErrorExist()
+        {
+            saveNewContactButton.GetElement().Click();
+
+            return errorPushMessageTitle.GetElement();
         }
     }
 }

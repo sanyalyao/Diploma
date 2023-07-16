@@ -1,6 +1,6 @@
 ﻿namespace BussinesObject.API.Models.TaskObjects
 {
-    public enum status
+    public enum Status
     {
         NotStarted,
         InProgress,

@@ -4,15 +4,15 @@ using BussinesObject.UI.Helpers;
 
 namespace TestCases.UI
 {
-    class ContactTests : TestBase
+    class ContactTests : LoginSteps
     {
         [Test]
         [Description("Create contact")]
         public void CreateContact()
         {
-            Login();
+            Login().GoToSalesPage();
 
-            ContactModel newContact = new CreationHelper().CreateContact();
+            ContactModel newContact = CreationHelper.CreateContact();
 
             ContactsPage.OpenContactsPage();
             CreationNewContactPage.CreateNewContact(newContact);
@@ -24,7 +24,7 @@ namespace TestCases.UI
         [Description("Edit old Contact")]
         public void EditContact()
         {
-            Login();
+            Login().GoToSalesPage();
             ContactsPage.OpenContactsPage();
 
             ContactModel oldContact;
@@ -35,12 +35,12 @@ namespace TestCases.UI
             }
             catch
             {
-                oldContact = new CreationHelper().CreateContact();
+                oldContact = CreationHelper.CreateContact();
 
                 CreationNewContactPage.CreateNewContact(oldContact);
             }
 
-            ContactModel newContact = new CreationHelper().CreateContact();
+            ContactModel newContact = CreationHelper.CreateContact();
             ContactModel changedContact = ContactPage.EditContact(newContact).GetContactDetails();
 
             Assert.AreEqual(newContact, changedContact);
@@ -51,7 +51,7 @@ namespace TestCases.UI
         [Description("Delete old Contact")]
         public void DeleteContact()
         {
-            Login();
+            Login().GoToSalesPage();
             ContactsPage.OpenContactsPage();
 
             ContactModel oldContact;
@@ -66,7 +66,7 @@ namespace TestCases.UI
             }
             catch
             {
-                oldContact = new CreationHelper().CreateContact();
+                oldContact = CreationHelper.CreateContact();
 
                 CreationNewContactPage.CreateNewContact(oldContact);
                 ContactsPage.OpenContactsPage();

@@ -9,8 +9,8 @@ namespace BussinesObject.API.Services
 {
     public class TaskService : BaseService
     {
-        private string SpecialTaskEndpoint = "/services/data/v58.0/sobjects/Task/{id}";
-        private string GetTaskEndpoint = "/services/data/v58.0/sobjects/Task";
+        private string SpecialTaskEndpoint = BaseTaskEndpoint + "/{id}";
+        private string GetTaskEndpoint = BaseTaskEndpoint;
 
         public TaskService(BaseAPIClient apiClient) : base(apiClient) { }
 
@@ -56,58 +56,16 @@ namespace BussinesObject.API.Services
             return apiClient.Execute(request);
         }
 
-        public string GetSubject(subject subject)
+        public string GetSubject(Subject subject)
         {
-            switch (subject)
-            {
-                case subject.Call:
-                    {
-                        return "Call";
-                    }
-                case subject.Email:
-                    {
-                        return "Email";
-                    }
-                case subject.SendLetter:
-                    {
-                        return "Send Letter";
-                    }
-                case subject.SendQuote:
-                    {
-                        return "Send Quote";
-                    }
-                default:
-                    {
-                        return "Other";
-                    }
-            }
+            string subjectString = Enum.GetName(typeof(Subject), subject);
+            return subjectString ?? "Other";
         }
 
-        public string GetStatus(status status)
+        public string GetStatus(Status status)
         {
-            switch (status)
-            {
-                case status.NotStarted:
-                    {
-                        return "Not Started";
-                    }
-                case status.InProgress:
-                    {
-                        return "In Progress";
-                    }
-                case status.Completed:
-                    {
-                        return "Completed";
-                    }
-                case status.WaitingOnSomeoneElse:
-                    {
-                        return "Waiting on someone else";
-                    }
-                default:
-                    {
-                        return "Deferred";
-                    }
-            }
+            string subjectString = Enum.GetName(typeof(Status), status);
+            return subjectString ?? "Deferred";
         }
     }
 }

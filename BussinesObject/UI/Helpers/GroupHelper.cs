@@ -4,19 +4,9 @@ namespace BussinesObject.UI.Helpers
 {
     public class GroupHelper
     {
-        public static int GetAccessTypes(accessTypes accessTypes)
+        public static int GetAccessTypes(AccessTypes accessTypes)
         {
-            switch (accessTypes)
-            {
-                case accessTypes.Public:
-                    {
-                        return 0;
-                    }
-                default:
-                    {
-                        return 1;
-                    }
-            }
+            return (int)accessTypes;
         }
 
         public static int GetAccessTypes(string accessTypes)

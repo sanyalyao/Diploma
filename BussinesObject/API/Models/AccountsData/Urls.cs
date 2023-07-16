@@ -2,13 +2,13 @@
 {
     public class Urls
     {
-        public string compactLayouts { get; set; }
-        public string rowTemplate { get; set; }
-        public string approvalLayouts { get; set; }
-        public string listviews { get; set; }
-        public string describe { get; set; }
-        public string quickActions { get; set; }
-        public string layouts { get; set; }
-        public string sobject { get; set; }
+        public string CompactLayouts { get; set; }
+        public string RowTemplate { get; set; }
+        public string ApprovalLayouts { get; set; }
+        public string Listviews { get; set; }
+        public string Describe { get; set; }
+        public string QuickActions { get; set; }
+        public string Layouts { get; set; }
+        public string Sobject { get; set; }
     }
 }

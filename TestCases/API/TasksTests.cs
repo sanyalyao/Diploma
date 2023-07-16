@@ -11,7 +11,7 @@ namespace TestCases.API
         {
             TaskModel newTask = new TaskModel()
             {
-                Subject = taskService.GetSubject(subject.SendLetter),
+                Subject = taskService.GetSubject(Subject.SendLetter),
             };
 
             taskServiceSteps.CreateNewTaskSteps(newTask);
@@ -28,8 +28,8 @@ namespace TestCases.API
         {
             TaskModel newTask = new TaskModel()
             {
-                Subject = taskService.GetSubject(subject.SendLetter),
-                Status = taskService.GetStatus(status.Completed),
+                Subject = taskService.GetSubject(Subject.SendLetter),
+                Status = taskService.GetStatus(Status.Completed),
             };
             RecentItem oldTask = taskService.GetTasks()[0];
 

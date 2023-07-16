@@ -12,7 +12,7 @@ namespace TestCases.API
         [OneTimeSetUp]
         public void Initial()
         {
-            apiClient = new BaseAPIClient(url);
+            apiClient = new BaseAPIClient(baseUrl);
             apiClient.AddToken(accessToken);
         }
     }

@@ -6,12 +6,12 @@ using BussinesObject.UI.Models.EnumObjects;
 
 namespace TestCases.UI
 {
-    public class GroupTests : TestBase
+    public class GroupTests : LoginSteps
     {
         [Test]
         public void CreateGroup()
         {
-            GroupModel newGroup = CreationHelper.CreateGroup(accessTypes.Public);
+            GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Public);
 
             Login().GoToSalesPage();
             GroupsPage.OpenGroupsPage();
@@ -42,7 +42,7 @@ namespace TestCases.UI
             Login().GoToSalesPage();
 
             GroupModel oldGroup = GroupsPage.OpenGroupsPage().EditGroup(0).GetGroupInfo();
-            GroupModel newGroup = CreationHelper.CreateGroup(accessTypes.Private);
+            GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Private);
 
             EditCreationGroupPage.FillUpFields(newGroup).ConfirmGroupChanges().ReloadCurrentPage();
 
