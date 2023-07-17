@@ -1,6 +1,7 @@
 ﻿using Faker;
 using BussinesObject.UI.Models;
 using BussinesObject.UI.Models.EnumObjects;
+using BussinesObject.API.Models.TaskObjects;
 
 namespace BussinesObject.UI.Helpers
 {
@@ -40,7 +41,7 @@ namespace BussinesObject.UI.Helpers
         public static GroupModel CreateGroup(AccessTypes accessTypes) 
         {
             string groupName = Company.Name();
-            var accessType = GroupHelper.GetAccessTypes(accessTypes);
+            var accessType = System.Enum.GetName(typeof(AccessTypes), accessTypes);
 
             GroupModel newGroup = new GroupModel()
             {

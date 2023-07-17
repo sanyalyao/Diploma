@@ -15,7 +15,7 @@ namespace TestCases.UI
             ContactModel newContact = CreationHelper.CreateContact();
 
             ContactsPage.OpenContactsPage();
-            CreationNewContactPage.CreateNewContact(newContact);
+            CreationNewContactPage.CreateNewContact(newContact).ConfirmCreationNewContact();
 
             Assert.AreEqual(newContact, ContactPage.GetContactDetails());
         }
@@ -37,11 +37,11 @@ namespace TestCases.UI
             {
                 oldContact = CreationHelper.CreateContact();
 
-                CreationNewContactPage.CreateNewContact(oldContact);
+                CreationNewContactPage.CreateNewContact(oldContact).ConfirmCreationNewContact();
             }
 
             ContactModel newContact = CreationHelper.CreateContact();
-            ContactModel changedContact = ContactPage.EditContact(newContact).GetContactDetails();
+            ContactModel changedContact = ContactPage.EditContact(newContact).ConfirmChanges().GetContactDetails();
 
             Assert.AreEqual(newContact, changedContact);
             Assert.AreNotEqual(changedContact, oldContact);

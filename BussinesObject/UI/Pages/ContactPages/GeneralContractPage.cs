@@ -18,5 +18,7 @@ namespace BussinesObject.UI.Pages.ContactPages
         protected Input mailingCountryInput = new Input("input", "name", "country");
 
         protected Button saveNewContactButton = new Button("button", "name", "SaveEdit");
+
+        protected PushMessage errorPushMessageTitle = new PushMessage(By.CssSelector("div[class='uiPanel--default uiPanel positioned north forceFormPageError slds-popover slds-popover_error open active'] *> div[class='panel-header'] *> h2[title='We hit a snag.']"));
     }
 }

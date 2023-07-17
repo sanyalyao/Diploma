@@ -11,8 +11,6 @@ namespace BussinesObject.UI.Pages.ContactPages
         private static By newContactBy = By.CssSelector("a[title='New']");
         private By newContactTitle = By.CssSelector("h2[class='slds-modal__title slds-hyphenate slds-text-heading--medium']");
 
-        private PushMessage errorPushMessageTitle = new PushMessage (By.CssSelector("div[class='uiPanel--default uiPanel positioned north forceFormPageError slds-popover slds-popover_error open active'] *> div[class='panel-header'] *> h2[title='We hit a snag.']")); 
-
         private Button newContactButton = new Button(newContactBy);
 
         public CreationNewContactPage CreateNewContact(ContactModel contact)

@@ -2,6 +2,7 @@
 {
     public enum AccessTypes
     {
+        None,
         Public,
         Private
     }

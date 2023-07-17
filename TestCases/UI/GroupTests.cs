@@ -11,12 +11,12 @@ namespace TestCases.UI
         [Test]
         public void CreateGroup()
         {
-            GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Public);
+            GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Private);
 
             Login().GoToSalesPage();
             GroupsPage.OpenGroupsPage();
 
-            List<string> groups = EditCreationGroupPage.CreateNewGroup(newGroup).OpenGroupsPage().ReloadCurrentPage().GetGroupsNames();
+            List<string> groups = EditCreationGroupPage.CreateNewGroup(newGroup).ConfirmCreationNewGroup().OpenGroupsPage().ReloadCurrentPage().GetGroupsNames();
 
             Assert.Contains(newGroup.Name, groups);
         }

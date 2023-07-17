@@ -19,10 +19,12 @@ namespace BussinesObject.UI.Pages.GroupPages
 
         private Input groupNameInput = new Input(groupNameFieldBy);
 
-        private RadioMenuItem accessTypeRadio = new RadioMenuItem(By.CssSelector("li[class='uiMenuItem uiRadioMenuItem']"));
+        private RadioMenuItem accessTypeRadio = new RadioMenuItem(By.CssSelector("li[class='uiMenuItem uiRadioMenuItem'] > a"));
         private RadioMenuItem radioMenu = new RadioMenuItem(By.CssSelector("a[role='button'][class='select']"));
 
-        public GroupsPage CreateNewGroup(GroupModel newGroup)
+        private PushMessage errorPushMessage = new PushMessage(By.CssSelector("ul[class='errorsList'] > li"));
+
+        public EditCreationGroupPage CreateNewGroup(GroupModel newGroup)
         {
             newGroupButton.GetElement().Click();
 
@@ -31,8 +33,14 @@ namespace BussinesObject.UI.Pages.GroupPages
             groupNameInput.GetElement().SendKeys(newGroup.Name);
 
             radioMenu.GetElement().Click();
-            ChooseAccessType(newGroup);
 
+            accessTypeRadio.GetElements().Where(element => element.GetAttribute("title").Contains(newGroup.AccessType)).First().Click();
+
+            return this;
+        }
+
+        public GroupsPage ConfirmCreationNewGroup()
+        {
             saveAndNextButton.GetElements()[0].Click();
 
             WaitHelper.WaitElementWithTitle(driver, uploadGroupPhotoTitleBy, "Upload Group Photo");
@@ -45,13 +53,21 @@ namespace BussinesObject.UI.Pages.GroupPages
             return new GroupsPage();
         }
 
+        public IWebElement CheckIfErrorExist()
+        {
+            saveAndNextButton.GetElements()[0].Click();
+
+            return errorPushMessage.GetElement();
+        }
+
         public EditCreationGroupPage FillUpFields(GroupModel newGroup)
         {
             groupNameInput.GetElement().Clear();
             groupNameInput.GetElement().SendKeys(newGroup.Name);
 
             radioMenu.GetElement().Click();
-            ChooseAccessType(newGroup);
+
+            accessTypeRadio.GetElements().Where(element => element.GetAttribute("title").Contains(newGroup.AccessType)).First().Click();
 
             return this;
         }
@@ -68,7 +84,7 @@ namespace BussinesObject.UI.Pages.GroupPages
         public GroupModel GetGroupInfo()
         {
             string nameGroup = driver.FindElement(groupNameFieldBy).Text;
-            int accessType = GroupHelper.GetAccessTypes(radioMenu.GetElement().Text);
+            string accessType = radioMenu.GetElement().Text;
 
             GroupModel group = new GroupModel()
             {
@@ -78,17 +94,5 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             return group;
         }        
-
-        private void ChooseAccessType(GroupModel newGroup)
-        {
-            if (newGroup.AccessType == 0)
-            {
-                accessTypeRadio.GetElements()[1].Click();
-            }
-            else
-            {
-                accessTypeRadio.GetElements()[2].Click();
-            }
-        }
     }
 }

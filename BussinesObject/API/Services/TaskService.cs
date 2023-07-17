@@ -64,8 +64,8 @@ namespace BussinesObject.API.Services
 
         public string GetStatus(Status status)
         {
-            string subjectString = Enum.GetName(typeof(Status), status);
-            return subjectString ?? "Deferred";
+            string statusString = Enum.GetName(typeof(Status), status);
+            return statusString ?? "Deferred";
         }
     }
 }
