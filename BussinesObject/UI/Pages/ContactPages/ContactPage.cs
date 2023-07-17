@@ -54,6 +54,11 @@ namespace BussinesObject.UI.Pages.ContactPages
             mailingCountryInput.GetElement().Clear();
             mailingCountryInput.GetElement().SendKeys(newContact.MailingCountry);
 
+            return this;
+        }
+
+        public ContactPage ConfirmChanges()
+        {
             saveNewContactButton.GetElement().Click();
 
             return this;
@@ -92,6 +97,11 @@ namespace BussinesObject.UI.Pages.ContactPages
             WaitHelper.WaitElement(driver, nameOfFirstColumnTableBy);
 
             return new ContactsPage();
+        }
+
+        public IWebElement CheckIfErrorExist()
+        {
+            return errorPushMessageTitle.GetElement();
         }
     }
 }

@@ -2,33 +2,33 @@
 {
     public class ObjectDescribe
     {
-        public bool activateable { get; set; }
-        public object associateEntityType { get; set; }
-        public object associateParentEntity { get; set; }
-        public bool createable { get; set; }
-        public bool custom { get; set; }
-        public bool customSetting { get; set; }
-        public bool deepCloneable { get; set; }
-        public bool deletable { get; set; }
-        public bool deprecatedAndHidden { get; set; }
-        public bool feedEnabled { get; set; }
-        public bool hasSubtypes { get; set; }
-        public bool isInterface { get; set; }
-        public bool isSubtype { get; set; }
-        public string keyPrefix { get; set; }
-        public string label { get; set; }
-        public string labelPlural { get; set; }
-        public bool layoutable { get; set; }
-        public bool mergeable { get; set; }
-        public bool mruEnabled { get; set; }
-        public string name { get; set; }
-        public bool queryable { get; set; }
-        public bool replicateable { get; set; }
-        public bool retrieveable { get; set; }
-        public bool searchable { get; set; }
-        public bool triggerable { get; set; }
-        public bool undeletable { get; set; }
-        public bool updateable { get; set; }
-        public Urls urls { get; set; }
+        public bool Activateable { get; set; }
+        public object AssociateEntityType { get; set; }
+        public object AssociateParentEntity { get; set; }
+        public bool Createable { get; set; }
+        public bool Custom { get; set; }
+        public bool CustomSetting { get; set; }
+        public bool DeepCloneable { get; set; }
+        public bool Deletable { get; set; }
+        public bool DeprecatedAndHidden { get; set; }
+        public bool FeedEnabled { get; set; }
+        public bool HasSubtypes { get; set; }
+        public bool IsInterface { get; set; }
+        public bool IsSubtype { get; set; }
+        public string KeyPrefix { get; set; }
+        public string Label { get; set; }
+        public string LabelPlural { get; set; }
+        public bool Layoutable { get; set; }
+        public bool Mergeable { get; set; }
+        public bool MruEnabled { get; set; }
+        public string Name { get; set; }
+        public bool Queryable { get; set; }
+        public bool Replicateable { get; set; }
+        public bool Retrieveable { get; set; }
+        public bool Searchable { get; set; }
+        public bool Triggerable { get; set; }
+        public bool Undeletable { get; set; }
+        public bool Updateable { get; set; }
+        public Urls Urls { get; set; }
     }
 }

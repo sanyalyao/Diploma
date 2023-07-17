@@ -3,6 +3,6 @@
     public class GroupModel
     {
         public string Name { get; set; }
-        public int AccessType { get; set; }
+        public string AccessType { get; set; }
     }
 }

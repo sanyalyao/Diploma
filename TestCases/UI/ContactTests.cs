@@ -4,18 +4,18 @@ using BussinesObject.UI.Helpers;
 
 namespace TestCases.UI
 {
-    class ContactTests : TestBase
+    class ContactTests : LoginSteps
     {
         [Test]
         [Description("Create contact")]
         public void CreateContact()
         {
-            Login();
+            Login().GoToSalesPage();
 
-            ContactModel newContact = new CreationHelper().CreateContact();
+            ContactModel newContact = CreationHelper.CreateContact();
 
             ContactsPage.OpenContactsPage();
-            CreationNewContactPage.CreateNewContact(newContact);
+            CreationNewContactPage.CreateNewContact(newContact).ConfirmCreationNewContact();
 
             Assert.AreEqual(newContact, ContactPage.GetContactDetails());
         }
@@ -24,7 +24,7 @@ namespace TestCases.UI
         [Description("Edit old Contact")]
         public void EditContact()
         {
-            Login();
+            Login().GoToSalesPage();
             ContactsPage.OpenContactsPage();
 
             ContactModel oldContact;
@@ -35,13 +35,13 @@ namespace TestCases.UI
             }
             catch
             {
-                oldContact = new CreationHelper().CreateContact();
+                oldContact = CreationHelper.CreateContact();
 
-                CreationNewContactPage.CreateNewContact(oldContact);
+                CreationNewContactPage.CreateNewContact(oldContact).ConfirmCreationNewContact();
             }
 
-            ContactModel newContact = new CreationHelper().CreateContact();
-            ContactModel changedContact = ContactPage.EditContact(newContact).GetContactDetails();
+            ContactModel newContact = CreationHelper.CreateContact();
+            ContactModel changedContact = ContactPage.EditContact(newContact).ConfirmChanges().GetContactDetails();
 
             Assert.AreEqual(newContact, changedContact);
             Assert.AreNotEqual(changedContact, oldContact);
@@ -51,7 +51,7 @@ namespace TestCases.UI
         [Description("Delete old Contact")]
         public void DeleteContact()
         {
-            Login();
+            Login().GoToSalesPage();
             ContactsPage.OpenContactsPage();
 
             ContactModel oldContact;
@@ -66,7 +66,7 @@ namespace TestCases.UI
             }
             catch
             {
-                oldContact = new CreationHelper().CreateContact();
+                oldContact = CreationHelper.CreateContact();
 
                 CreationNewContactPage.CreateNewContact(oldContact);
                 ContactsPage.OpenContactsPage();

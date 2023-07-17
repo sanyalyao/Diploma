@@ -2,15 +2,13 @@
 using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.Extensions;
 
 namespace BussinesObject.UI.Pages.GroupPages
 {
     public class GroupsPage : BasePage
     {
         private By titleOfTheGroupsPage = By.CssSelector("span[class='triggerLinkText selectedListView slds-page-header__title slds-truncate slds-p-right--xx-small uiOutputText']");
-        private By groupNameTitleBy = By.CssSelector("div[class='header anchor anchor--rec-home Public forceChatterUserProfileHighlightsStencilDesktop forceChatterChatterGroupCompactStencilDesktop forceRecordLayout'] *> span[class='uiOutputText']");
+        private By groupNameTitleBy = By.CssSelector("div[class='media__body nameActionsContainer slds-p-left--x-large slds-no-space slds-container_fluid']  *> span[class='uiOutputText']");
         private By groupNameFieldBy = By.CssSelector("div[data-target-selection-name='sfdc:RecordField.CollaborationGroup.Name'] *> input");
 
         private Button editGroupButton = new Button("div", "data-target-selection-name", "d3d97191b9714f2388cd2ad681fdc4ed");

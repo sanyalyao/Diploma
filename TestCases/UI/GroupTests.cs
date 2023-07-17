@@ -6,17 +6,17 @@ using BussinesObject.UI.Models.EnumObjects;
 
 namespace TestCases.UI
 {
-    public class GroupTests : TestBase
+    public class GroupTests : LoginSteps
     {
         [Test]
         public void CreateGroup()
         {
-            GroupModel newGroup = CreationHelper.CreateGroup(accessTypes.Public);
+            GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Private);
 
             Login().GoToSalesPage();
             GroupsPage.OpenGroupsPage();
 
-            List<string> groups = EditCreationGroupPage.CreateNewGroup(newGroup).OpenGroupsPage().ReloadCurrentPage().GetGroupsNames();
+            List<string> groups = EditCreationGroupPage.CreateNewGroup(newGroup).ConfirmCreationNewGroup().OpenGroupsPage().ReloadCurrentPage().GetGroupsNames();
 
             Assert.Contains(newGroup.Name, groups);
         }
@@ -42,7 +42,7 @@ namespace TestCases.UI
             Login().GoToSalesPage();
 
             GroupModel oldGroup = GroupsPage.OpenGroupsPage().EditGroup(0).GetGroupInfo();
-            GroupModel newGroup = CreationHelper.CreateGroup(accessTypes.Private);
+            GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Private);
 
             EditCreationGroupPage.FillUpFields(newGroup).ConfirmGroupChanges().ReloadCurrentPage();
 

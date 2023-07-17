@@ -4,7 +4,7 @@
     {
         public string Username;
         public string Password;
-        public string SecurityQuestion = "gerwrht";
+        public string SecurityQuestion;
 
         public UserModel(string username, string password)
         {

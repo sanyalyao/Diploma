@@ -1,13 +1,14 @@
 ﻿using BussinesObject.UI.Elements;
 using BussinesObject.UI.Helpers;
 using BussinesObject.UI.Models;
+using Core.RunSettings;
 using OpenQA.Selenium;
 
 namespace BussinesObject.UI.Pages
 {
     public class LoginPage : BasePage
     {
-        private const string url = "https://ozatvn2-dev-ed.develop.my.salesforce.com/";
+        private static string url = baseUrl;
 
         private By titleHomeBy = By.CssSelector("span[class='breadcrumbDetail uiOutputText']");
 

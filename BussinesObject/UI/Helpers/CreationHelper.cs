@@ -1,12 +1,13 @@
 ﻿using Faker;
 using BussinesObject.UI.Models;
 using BussinesObject.UI.Models.EnumObjects;
+using BussinesObject.API.Models.TaskObjects;
 
 namespace BussinesObject.UI.Helpers
 {
     public class CreationHelper
     {
-        public AccountModel CreateAccount()
+        public static AccountModel CreateAccount()
         {
             string accountName = Company.Name();
             string phone = Phone.Number();
@@ -21,7 +22,7 @@ namespace BussinesObject.UI.Helpers
             return account;
         }
 
-        public ContactModel CreateContact()
+        public static ContactModel CreateContact()
         {
             string firstname = Name.First();
             string lastname = Name.Last();
@@ -37,10 +38,10 @@ namespace BussinesObject.UI.Helpers
             return contact;
         }
 
-        public static GroupModel CreateGroup(accessTypes accessTypes) 
+        public static GroupModel CreateGroup(AccessTypes accessTypes) 
         {
             string groupName = Company.Name();
-            var accessType = GroupHelper.GetAccessTypes(accessTypes);
+            var accessType = System.Enum.GetName(typeof(AccessTypes), accessTypes);
 
             GroupModel newGroup = new GroupModel()
             {

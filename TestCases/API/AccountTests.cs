@@ -13,11 +13,5 @@ namespace TestCases.API
 
             accountServiceSteps.CreateNewAccountSteps(newAccount);
         }
-
-        [Test]
-        public void DeleteAccount()
-        {
-
-        }
     }
 }

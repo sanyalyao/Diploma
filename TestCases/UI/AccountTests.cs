@@ -4,15 +4,15 @@ using BussinesObject.UI.Helpers;
 
 namespace TestCases.UI
 {
-    public class AccountTests : TestBase
+    public class AccountTests : LoginSteps
     {
         [Test]
         [Description("Create new account")]
         public void CreateAccount()
         {
-            Login();
+            Login().GoToSalesPage();
 
-            AccountModel newAccount = new CreationHelper().CreateAccount();
+            AccountModel newAccount = CreationHelper.CreateAccount();
 
             AccountsPage.OpenAccountsPage();
             CreationNewAccountPage.CreateNewAccount(newAccount);
@@ -24,7 +24,7 @@ namespace TestCases.UI
         [Description("Edit old account")]
         public void EditAccount()
         {
-            Login();
+            Login().GoToSalesPage();
             AccountsPage.OpenAccountsPage();
 
             AccountModel oldAccount;
@@ -35,12 +35,12 @@ namespace TestCases.UI
             }
             catch
             {
-                oldAccount = new CreationHelper().CreateAccount();
+                oldAccount = CreationHelper.CreateAccount();
 
                 CreationNewAccountPage.CreateNewAccount(oldAccount);
             }
 
-            AccountModel newAccount = new CreationHelper().CreateAccount();
+            AccountModel newAccount = CreationHelper.CreateAccount();
             AccountModel changedAccount = AccountPage.EditAccount(newAccount).GetAccountDetails();
 
             Assert.AreEqual(newAccount, changedAccount);
@@ -51,7 +51,7 @@ namespace TestCases.UI
         [Description("Delete old account")]
         public void DeleteAccount()
         {
-            Login();
+            Login().GoToSalesPage();
             AccountsPage.OpenAccountsPage();
 
             AccountModel oldAccount;
@@ -66,7 +66,7 @@ namespace TestCases.UI
             }
             catch
             {
-                oldAccount = new CreationHelper().CreateAccount();
+                oldAccount = CreationHelper.CreateAccount();
 
                 CreationNewAccountPage.CreateNewAccount(oldAccount);
                 AccountsPage.OpenAccountsPage();

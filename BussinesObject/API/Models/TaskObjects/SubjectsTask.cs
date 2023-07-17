@@ -1,6 +1,6 @@
 ﻿namespace BussinesObject.API.Models.TaskObjects
 {
-    public enum subject
+    public enum Subject
     {
         Call,
         Email,

@@ -1,7 +1,8 @@
 ﻿namespace BussinesObject.UI.Models.EnumObjects
 {
-    public enum accessTypes
+    public enum AccessTypes
     {
+        None,
         Public,
         Private
     }

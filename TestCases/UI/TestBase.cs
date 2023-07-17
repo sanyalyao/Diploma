@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using BussinesObject.UI.Pages;
 using Core.BrowserSettings;
-using BussinesObject.UI.Models;
 using Core.RunSettings;
 using BussinesObject.UI.Pages.AccountPages;
 using BussinesObject.UI.Pages.ContactPages;
@@ -11,7 +10,7 @@ namespace TestCases.UI
 {
     public class TestBase : SetUpSettings
     {
-        protected LoginPage LoginPage;
+        protected static LoginPage LoginPage;
         protected AccountPage AccountPage;
         protected ContactPage ContactPage;
         protected AccountsPage AccountsPage;
@@ -37,15 +36,6 @@ namespace TestCases.UI
             GroupPage = new GroupPage();
             EditCreationGroupPage = new EditCreationGroupPage();
             HeadPanel = new HeadPanel();
-        }
-
-        public HeadPanel Login()
-        {
-            UserModel user = new UserModel(username, password);
-
-            LoginPage.OpenLoginPage().LogIn(user);
-
-            return new HeadPanel();
         }
 
         [TearDown]

@@ -13,7 +13,7 @@ namespace BussinesObject.UI.Pages.ContactPages
 
         private Button newContactButton = new Button(newContactBy);
 
-        public ContactPage CreateNewContact(ContactModel contact)
+        public CreationNewContactPage CreateNewContact(ContactModel contact)
         {
             Actions action = new Actions(driver);
 
@@ -33,11 +33,23 @@ namespace BussinesObject.UI.Pages.ContactPages
             mailingCityInput.GetElement().SendKeys(contact.MailingCity);
             mailingCountryInput.GetElement().SendKeys(contact.MailingCountry);
 
+            return this;
+        }
+
+        public ContactPage ConfirmCreationNewContact()
+        {
             saveNewContactButton.GetElement().Click();
 
             WaitHelper.WaitElement(driver, contactNameTitleBy);
 
             return new ContactPage();
+        }
+
+        public IWebElement CheckIfErrorExist()
+        {
+            saveNewContactButton.GetElement().Click();
+
+            return errorPushMessageTitle.GetElement();
         }
     }
 }
