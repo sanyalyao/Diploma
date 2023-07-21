@@ -7,21 +7,14 @@ namespace Core.BrowserSettings
 {
     public class Browser : SetUpSettings
     {
-        private static Browser instance = null;
+        private static readonly ThreadLocal<Browser> BrowserInstances = new();
+        public static Browser Instance => GetBrowser();
         private IWebDriver driver;
         public IWebDriver Driver { get { return driver; } }
 
-        public static Browser Instance
+        private static Browser GetBrowser()
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Browser();
-                }
-
-                return instance;
-            }
+            return BrowserInstances.Value ?? (BrowserInstances.Value = new Browser());
         }
 
         private Browser()
@@ -35,7 +28,8 @@ namespace Core.BrowserSettings
         public void CloseBrowser()
         {
             driver?.Dispose();
-            instance = null;
+            BrowserInstances.Value = null;
+            driver = null;
         }
     }
 }

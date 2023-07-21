@@ -3,6 +3,7 @@ using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using NUnit.Allure.Attributes;
 
 namespace BussinesObject.UI.Pages.ContactPages
 {
@@ -19,6 +20,7 @@ namespace BussinesObject.UI.Pages.ContactPages
         private Button deleteContactButton = new Button(By.CssSelector("runtime_platform_actions-action-renderer[apiname='Delete'] *> span"));
         private Button confirmDeleteContactButton = new Button("button", "title", "Delete");
 
+        [AllureStep("Edit special contact")]
         public ContactPage EditContact(ContactModel newContact)
         {
             Actions action = new Actions(driver);
@@ -54,16 +56,31 @@ namespace BussinesObject.UI.Pages.ContactPages
             mailingCountryInput.GetElement().Clear();
             mailingCountryInput.GetElement().SendKeys(newContact.MailingCountry);
 
+            logger.Info($"Edit special contact. New information:" +
+                $"\nFirstName - {newContact.FirstName}" +
+                $"\nLastName - {newContact.LastName}" +
+                $"\nMobile - {newContact.Mobile}" +
+                $"\nEmail - {newContact.Email}" +
+                $"\nMailing Street - {newContact.MailingStreet}" +
+                $"\nMailing Zip - {newContact.MailingZip}" +
+                $"\nMailing City - {newContact.MailingCity}" +
+                $"\nMailing Country - {newContact.MailingCountry}");
+
+
             return this;
         }
 
-        public ContactPage ConfirmChanges()
+        [AllureStep("Confirm contact changes")]
+        public ContactPage ConfirmContactChanges()
         {
             saveNewContactButton.GetElement().Click();
 
+            logger.Info("Confirm contact changes");
+
             return this;
         }
 
+        [AllureStep("Get contact details")]
         public ContactModel GetContactDetails()
         {
             driver.FindElement(detailsBy).Click();
@@ -83,9 +100,16 @@ namespace BussinesObject.UI.Pages.ContactPages
 
             ContactModel account = new ContactModel(firstNameLastName, mobile, email, address);
 
+            logger.Info($"Get contact details:" +
+                $"\nFirstName and LastName - {firstNameLastName}" +
+                $"\nmobile - {mobile}" +
+                $"\nemail - {email}" +
+                $"\naddress - {address}");
+
             return account;
         }
 
+        [AllureStep("Delete special contact")]
         public ContactsPage DeleteContact()
         {
             Actions action = new Actions(driver);
@@ -96,11 +120,16 @@ namespace BussinesObject.UI.Pages.ContactPages
 
             WaitHelper.WaitElement(driver, nameOfFirstColumnTableBy);
 
+            logger.Info("Delete special contact");
+
             return new ContactsPage();
         }
 
+        [AllureStep("Check if push error exist")]
         public IWebElement CheckIfErrorExist()
         {
+            logger.Info($"Check if push error exist. Is displayed error - {errorPushMessageTitle.GetElement().Displayed}");
+
             return errorPushMessageTitle.GetElement();
         }
     }

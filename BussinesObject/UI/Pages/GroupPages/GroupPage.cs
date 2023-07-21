@@ -1,5 +1,6 @@
 ﻿using BussinesObject.UI.Elements;
 using BussinesObject.UI.Helpers;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 
 namespace BussinesObject.UI.Pages.GroupPages
@@ -12,6 +13,7 @@ namespace BussinesObject.UI.Pages.GroupPages
         private Button deleteGroupButton = new Button("a", "data-target-selection-name", "sfdc:StandardButton.CollaborationGroup.DeleteGroup");
         private Button confirmDeleteGroupButton = new Button("button", "title", "Delete Group");
 
+        [AllureStep("Delete special group")]
         public GroupsPage DeleteGroup()
         {
             listOfCommandsButton.GetElement().Click();
@@ -19,6 +21,8 @@ namespace BussinesObject.UI.Pages.GroupPages
             confirmDeleteGroupButton.GetElement().Click();
 
             WaitHelper.WaitElement(driver, nameOfFirstColumnTableBy);
+
+            logger.Info("Delete special group");
 
             return new GroupsPage();
         }

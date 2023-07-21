@@ -3,12 +3,19 @@ using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using BussinesObject.UI.Pages.GroupPages;
 using BussinesObject.UI.Models.EnumObjects;
+using Allure.Net.Commons;
+using NUnit.Allure.Attributes;
 
 namespace TestCases.UI
 {
     public class GroupTests : LoginSteps
     {
         [Test]
+        [Description("Create a group")]
+        [Category("UI"), Category("Group")]
+        [Order(1)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void CreateGroup()
         {
             GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Private);
@@ -22,6 +29,11 @@ namespace TestCases.UI
         }
 
         [Test]
+        [Description("Delete a group")]
+        [Category("UI"), Category("Group")]
+        [Order(3)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void DeleteGroup() 
         {
             Login().GoToSalesPage();
@@ -37,6 +49,11 @@ namespace TestCases.UI
         }
 
         [Test]
+        [Description("Edit a group")]
+        [Category("UI"), Category("Group")]
+        [Order(2)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void EditGroup()
         {
             Login().GoToSalesPage();

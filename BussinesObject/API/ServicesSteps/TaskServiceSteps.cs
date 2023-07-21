@@ -21,6 +21,9 @@ namespace BussinesObject.API.ServicesSteps
             SuccessTaskCreation response = TaskService.CreateNewTask(newTask);
             List<string> tasks = TaskService.GetTasks().Select(task => task.Id).ToList();
 
+            logger.Info($"Create new Task [Steps]. New Task ID - {response.Id}");
+            logger.Info($"Is success status code - {response.Success}");
+
             Assert.Contains(response.Id, tasks);
             Assert.IsTrue(Boolean.Parse(response.Success));
         }
@@ -33,6 +36,8 @@ namespace BussinesObject.API.ServicesSteps
 
             List<string> newTasks = TaskService.GetTasks().Select(task => task.Id).ToList();
 
+            logger.Info($"Delete Task [Steps]. Is success status code - {response.IsSuccessStatusCode}");
+
             Assert.IsTrue(response.IsSuccessStatusCode);
             Assert.AreEqual(oldTasks.Count - 1, newTasks.Count);
         }
@@ -40,6 +45,17 @@ namespace BussinesObject.API.ServicesSteps
         public void EditTaskSteps(RecentItem oldTask, TaskModel newTask)
         {
             var response = TaskService.EditTask(oldTask, newTask);
+
+            logger.Info($"Edit Task [Steps]" +
+                $"\nCurrent Task:" +
+                $"\nSubject - {oldTask.Subject}" +
+                $"\nID - {oldTask.Id}");
+
+            logger.Info($"\nNew Task:" +
+                $"\nSubject - {newTask.Subject}" +
+                $"\nStatus - {newTask.Status}");
+
+            logger.Info($"Is success status code - {response.IsSuccessStatusCode}");
 
             Assert.IsTrue(response.IsSuccessStatusCode);
         }

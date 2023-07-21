@@ -3,6 +3,7 @@ using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using NUnit.Allure.Attributes;
 
 namespace BussinesObject.UI.Pages.AccountPages
 {
@@ -13,6 +14,7 @@ namespace BussinesObject.UI.Pages.AccountPages
 
         private Button newAccountButton = new Button(newAccountBy);
 
+        [AllureStep("Create new account")]
         public AccountPage CreateNewAccount(AccountModel account)
         {
             Actions action = new Actions(driver);
@@ -34,6 +36,15 @@ namespace BussinesObject.UI.Pages.AccountPages
             saveNewAccountButton.GetElement().Click();
 
             WaitHelper.WaitElement(driver, accountNameTitleBy);
+
+            logger.Info($"Create new account:" +
+                $"\nAccount Name - {account.AccountName}" +
+                $"\nPhone - {account.Phone}" +
+                $"\nAccount Number - {account.AccountNumber}" +
+                $"\nBilling Street - {account.BillingStreet}" +
+                $"\nBilling Zip - {account.BillingZip}" +
+                $"\nBilling City - {account.BillingCity}" +
+                $"\nBilling Country - {account.BillingCountry}");
 
             return new AccountPage();
         }

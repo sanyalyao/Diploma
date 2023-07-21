@@ -1,7 +1,7 @@
 ﻿using BussinesObject.UI.Elements;
 using BussinesObject.UI.Helpers;
 using BussinesObject.UI.Models;
-using Core.RunSettings;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 
 namespace BussinesObject.UI.Pages
@@ -16,14 +16,21 @@ namespace BussinesObject.UI.Pages
         private Input passwordInput = new Input("input", "name", "pw");
         private Input buttonLogin = new Input("input", "name", "Login");
 
+        [AllureStep("Open Login page")]
         public LoginPage OpenLoginPage()
         {
+            logger.Info($"Open Login page - {url}");
+
             driver.Navigate().GoToUrl(url);
+
             return this;
         }
 
+        [AllureStep("Login")]
         public void LogIn(UserModel user)
         {
+            logger.Info($"Login as \"{user.Username}\"");
+
             usernameInput.GetElement().SendKeys(user.Username);
             passwordInput.GetElement().SendKeys(user.Password);
             buttonLogin.GetElement().Click();
