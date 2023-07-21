@@ -1,13 +1,19 @@
 ﻿using BussinesObject.UI.Models;
 using NUnit.Framework;
 using BussinesObject.UI.Helpers;
+using Allure.Net.Commons;
+using NUnit.Allure.Attributes;
 
 namespace TestCases.UI
 {
     class ContactTests : LoginSteps
     {
         [Test]
-        [Description("Create contact")]
+        [Description("Create a contact")]
+        [Category("UI"), Category("Contact")]
+        [Order(1)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void CreateContact()
         {
             Login().GoToSalesPage();
@@ -21,7 +27,11 @@ namespace TestCases.UI
         }
 
         [Test]
-        [Description("Edit old Contact")]
+        [Description("Edit a contact")]
+        [Category("UI"), Category("Contact")]
+        [Order(3)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void EditContact()
         {
             Login().GoToSalesPage();
@@ -41,14 +51,18 @@ namespace TestCases.UI
             }
 
             ContactModel newContact = CreationHelper.CreateContact();
-            ContactModel changedContact = ContactPage.EditContact(newContact).ConfirmChanges().GetContactDetails();
+            ContactModel changedContact = ContactPage.EditContact(newContact).ConfirmContactChanges().GetContactDetails();
 
             Assert.AreEqual(newContact, changedContact);
             Assert.AreNotEqual(changedContact, oldContact);
         }
 
         [Test]
-        [Description("Delete old Contact")]
+        [Description("Delete a contact")]
+        [Category("UI"), Category("Contact")]
+        [Order(2)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void DeleteContact()
         {
             Login().GoToSalesPage();

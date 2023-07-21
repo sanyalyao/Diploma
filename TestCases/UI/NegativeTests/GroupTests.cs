@@ -4,6 +4,8 @@ using BussinesObject.UI.Helpers;
 using BussinesObject.UI.Pages.GroupPages;
 using BussinesObject.UI.Models.EnumObjects;
 using OpenQA.Selenium;
+using Allure.Net.Commons;
+using NUnit.Allure.Attributes;
 
 namespace TestCases.UI.NegativeTests
 {
@@ -11,6 +13,9 @@ namespace TestCases.UI.NegativeTests
     {
         [Test]
         [Description("Checking a negative push message when name is not filled up and access type is chosen")]
+        [Category("UI"), Category("Group"), Category("Negative")]
+        [AllureSeverity(SeverityLevel.normal)]
+
         public void CreateGroupWithoutName()
         {
             GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Public);
@@ -27,6 +32,9 @@ namespace TestCases.UI.NegativeTests
 
         [Test]
         [Description("Checking a negative push message when name is filled up and access type is not chosen")]
+        [Category("UI"), Category("Group"), Category("Negative")]
+        [AllureSeverity(SeverityLevel.normal)]
+
         public void CreateGroupWithoutAccessType()
         {
             GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.None);
@@ -42,6 +50,9 @@ namespace TestCases.UI.NegativeTests
 
         [Test]
         [Description("Checking a negative push message when name is not filled up and access type is not chosen")]
+        [Category("UI"), Category("Group"), Category("Negative")]
+        [AllureSeverity(SeverityLevel.normal)]
+
         public void CreateGroupWithEmptyFields()
         {
             GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.None);

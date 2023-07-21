@@ -1,6 +1,7 @@
 ﻿using BussinesObject.UI.Elements;
 using BussinesObject.UI.Helpers;
 using BussinesObject.UI.Models;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
@@ -13,6 +14,7 @@ namespace BussinesObject.UI.Pages.ContactPages
 
         private Button newContactButton = new Button(newContactBy);
 
+        [AllureStep("Create new contact")]
         public CreationNewContactPage CreateNewContact(ContactModel contact)
         {
             Actions action = new Actions(driver);
@@ -33,21 +35,38 @@ namespace BussinesObject.UI.Pages.ContactPages
             mailingCityInput.GetElement().SendKeys(contact.MailingCity);
             mailingCountryInput.GetElement().SendKeys(contact.MailingCountry);
 
+            logger.Info($"Create new contact:" +
+                $"\nFirstName - {contact.FirstName}" +
+                $"\nLastName - {contact.LastName}" +
+                $"\nMobile - {contact.Mobile}" +
+                $"\nEmail - {contact.Email}" +
+                $"\nMailing Street - {contact.MailingStreet}" +
+                $"\nMailing Zip - {contact.MailingZip}" +
+                $"\nMailing City - {contact.MailingCity}" +
+                $"\nMailing Country - {contact.MailingCountry}");
+
             return this;
         }
 
+        [AllureStep("Confirm creation of new contact")]
         public ContactPage ConfirmCreationNewContact()
         {
             saveNewContactButton.GetElement().Click();
 
             WaitHelper.WaitElement(driver, contactNameTitleBy);
 
+            logger.Info("Confirm creation of new contact");
+
             return new ContactPage();
         }
 
+        [AllureStep("Check if push error exist")]
         public IWebElement CheckIfErrorExist()
         {
             saveNewContactButton.GetElement().Click();
+
+            logger.Info($"Check if push error exist. Is displayed error - {errorPushMessageTitle.GetElement().Displayed}");
+            logger.Info($"Error title - {errorPushMessageTitle.GetElement().Text}");
 
             return errorPushMessageTitle.GetElement();
         }

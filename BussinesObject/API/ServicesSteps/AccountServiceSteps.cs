@@ -20,6 +20,9 @@ namespace BussinesObject.API.ServicesSteps
             SuccessAccountCreation response = AccountService.CreateNewAccount(newAccount);
             List<string> accounts = AccountService.GetAccounts().Select(account => account.Id).ToList();
 
+            logger.Info($"Create new account [Steps]. New Account ID - {response.Id}");
+            logger.Info($"Is success status code - {response.Success}");
+
             Assert.Contains(response.Id, accounts);
             Assert.IsTrue(Boolean.Parse(response.Success));
         }

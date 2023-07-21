@@ -2,6 +2,7 @@
 using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
+using NUnit.Allure.Attributes;
 
 namespace BussinesObject.UI.Pages.GroupPages
 {
@@ -24,6 +25,7 @@ namespace BussinesObject.UI.Pages.GroupPages
 
         private PushMessage errorPushMessage = new PushMessage(By.CssSelector("ul[class='errorsList'] > li"));
 
+        [AllureStep("Create new group")]
         public EditCreationGroupPage CreateNewGroup(GroupModel newGroup)
         {
             newGroupButton.GetElement().Click();
@@ -36,9 +38,12 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             accessTypeRadio.GetElements().Where(element => element.GetAttribute("title").Contains(newGroup.AccessType)).First().Click();
 
+            logger.Info($"Create new group. Name - {newGroup.Name}, AccessType - {newGroup.AccessType}");
+
             return this;
         }
 
+        [AllureStep("Confirm creation of new group")]
         public GroupsPage ConfirmCreationNewGroup()
         {
             saveAndNextButton.GetElements()[0].Click();
@@ -50,16 +55,23 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             WaitHelper.WaitElementWithTitle(driver, groupDetailsBy, "Group Details");
 
+            logger.Info("Confirm creation of new group");
+
             return new GroupsPage();
         }
 
+        [AllureStep("Check if push error exist")]
         public IWebElement CheckIfErrorExist()
         {
             saveAndNextButton.GetElements()[0].Click();
 
+            logger.Info($"Check if push error exist. Is displayed error: {errorPushMessage.GetElement().Displayed}");
+            logger.Info($"Error text - {errorPushMessage.GetElement().Text}");
+
             return errorPushMessage.GetElement();
         }
 
+        [AllureStep("Fill up the fields")]
         public EditCreationGroupPage FillUpFields(GroupModel newGroup)
         {
             groupNameInput.GetElement().Clear();
@@ -69,18 +81,24 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             accessTypeRadio.GetElements().Where(element => element.GetAttribute("title").Contains(newGroup.AccessType)).First().Click();
 
+            logger.Info($"Fill up the fields. New name - {newGroup.Name}, new accessType - {newGroup.AccessType}");
+
             return this;
         }
 
+        [AllureStep("Confirm group changes")]
         public GroupsPage ConfirmGroupChanges()
         {
             saveButton.GetElement().Click();
 
             WaitHelper.WaitElementWithTitle(driver, titleOfTheGroupsPage, "Recently Viewed");
 
+            logger.Info("Confirm group changes");
+
             return new GroupsPage();
         }
 
+        [AllureStep("Get information about the group")]
         public GroupModel GetGroupInfo()
         {
             string nameGroup = driver.FindElement(groupNameFieldBy).Text;
@@ -91,6 +109,8 @@ namespace BussinesObject.UI.Pages.GroupPages
                 Name = nameGroup,
                 AccessType = accessType,
             };
+
+            logger.Info($"Get information about the group. Name - {nameGroup}, AccessType - {accessType}");
 
             return group;
         }        

@@ -3,6 +3,7 @@ using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using NUnit.Allure.Attributes;
 
 namespace BussinesObject.UI.Pages.AccountPages
 {
@@ -19,7 +20,7 @@ namespace BussinesObject.UI.Pages.AccountPages
         private Button deleteAccountButton = new Button(By.CssSelector("runtime_platform_actions-action-renderer[apiname='Delete'] *> span"));
         private Button confirmDeleteAccountButton = new Button("button", "title", "Delete");
 
-
+        [AllureStep("Edit special account")]
         public AccountPage EditAccount(AccountModel newAccount)
         {
             Actions action = new Actions(driver);
@@ -28,7 +29,6 @@ namespace BussinesObject.UI.Pages.AccountPages
 
             action.Click(editAccountButton.GetElement()).Build().Perform();
 
-            accountNameInput.GetElement().Clear();
             accountNameInput.GetElement().Clear();
             accountNameInput.GetElement().SendKeys(newAccount.AccountName);
 
@@ -52,11 +52,29 @@ namespace BussinesObject.UI.Pages.AccountPages
             billingCountryInput.GetElement().Clear();
             billingCountryInput.GetElement().SendKeys(newAccount.BillingCountry);
 
-            saveNewAccountButton.GetElement().Click();
+            logger.Info($"Edit special account. New information:" +
+                $"\nAccount Name - {newAccount.AccountName}" +
+                $"\nPhone - {newAccount.Phone}" +
+                $"\nAccount Number - {newAccount.AccountNumber}" +
+                $"\nBilling Street - {newAccount.BillingStreet}" +
+                $"\nBilling Zip - {newAccount.BillingZip}" +
+                $"\nBilling City - {newAccount.BillingCity}" +
+                $"\nBilling Country - {newAccount.BillingCountry}");
 
             return this;
         }
 
+        [AllureStep("Confirm account changes")]
+        public AccountPage ConfirmAccountChanges()
+        {
+            saveNewAccountButton.GetElement().Click();
+
+            logger.Info("Confirm account changes");
+
+            return this;
+        }
+
+        [AllureStep("Delete special account")]
         public AccountsPage DeleteAccount()
         {
             Actions action = new Actions(driver);
@@ -67,9 +85,12 @@ namespace BussinesObject.UI.Pages.AccountPages
 
             WaitHelper.WaitElement(driver, nameOfFirstColumnTableBy);
 
+            logger.Info("Delete special account");
+
             return new AccountsPage();
         }
 
+        [AllureStep("Get account details")]
         public AccountModel GetAccountDetails()
         {
             driver.FindElement(detailsBy).Click();
@@ -88,6 +109,12 @@ namespace BussinesObject.UI.Pages.AccountPages
                 : "";
 
             AccountModel account = new AccountModel(accountName, phone, accountNumber, address);
+
+            logger.Info($"Get account details:" +
+                $"\naccount Name - {accountName}" +
+                $"\nphone - {phone}" +
+                $"\naccount Number - {accountNumber}" +
+                $"\naddress - {address}");
 
             return account;
         }

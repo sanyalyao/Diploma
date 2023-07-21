@@ -1,5 +1,6 @@
 ﻿using BussinesObject.UI.Elements;
 using BussinesObject.UI.Helpers;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 
 namespace BussinesObject.UI.Pages
@@ -13,6 +14,7 @@ namespace BussinesObject.UI.Pages
         private Button appLauncher = new Button("div", "class", "appLauncher slds-context-bar__icon-action");
         private Button appSales = new Button(By.LinkText("Sales"));
 
+        [AllureStep("Go to the Sales page")]
         public void GoToSalesPage()
         {
             appLauncher.GetElement().Click();
@@ -20,6 +22,8 @@ namespace BussinesObject.UI.Pages
             appSales.GetElement().Click();
 
             WaitHelper.WaitElement(driver, salesPageTitleBy);
+
+            logger.Info($"Go to the Sales page - {driver.Url}");
         }
     }
 }

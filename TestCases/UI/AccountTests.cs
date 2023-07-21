@@ -1,13 +1,19 @@
 ﻿using BussinesObject.UI.Models;
 using NUnit.Framework;
 using BussinesObject.UI.Helpers;
+using Allure.Net.Commons;
+using NUnit.Allure.Attributes;
 
 namespace TestCases.UI
 {
     public class AccountTests : LoginSteps
     {
         [Test]
-        [Description("Create new account")]
+        [Description("Create an account")]
+        [Category("UI"), Category("Account")]
+        [Order(1)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void CreateAccount()
         {
             Login().GoToSalesPage();
@@ -21,7 +27,11 @@ namespace TestCases.UI
         }
 
         [Test]
-        [Description("Edit old account")]
+        [Description("Edit an account")]
+        [Category("UI"), Category("Account")]
+        [Order(2)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void EditAccount()
         {
             Login().GoToSalesPage();
@@ -41,14 +51,18 @@ namespace TestCases.UI
             }
 
             AccountModel newAccount = CreationHelper.CreateAccount();
-            AccountModel changedAccount = AccountPage.EditAccount(newAccount).GetAccountDetails();
+            AccountModel changedAccount = AccountPage.EditAccount(newAccount).ConfirmAccountChanges().GetAccountDetails();
 
             Assert.AreEqual(newAccount, changedAccount);
             Assert.AreNotEqual(changedAccount, oldAccount);
         }
 
         [Test]
-        [Description("Delete old account")]
+        [Description("Delete an account")]
+        [Category("UI"), Category("Account")]
+        [Order(3)]
+        [AllureSeverity(SeverityLevel.critical)]
+
         public void DeleteAccount()
         {
             Login().GoToSalesPage();
