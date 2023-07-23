@@ -5,12 +5,13 @@ using System.Drawing;
 
 namespace Core.BrowserSettings
 {
-    public class Browser : SetUpSettings
+    public class Browser
     {
         private static readonly ThreadLocal<Browser> BrowserInstances = new();
         public static Browser Instance => GetBrowser();
         private IWebDriver driver;
         public IWebDriver Driver { get { return driver; } }
+        public SetUpSettings Settings => new();
 
         private static Browser GetBrowser()
         {
@@ -20,9 +21,13 @@ namespace Core.BrowserSettings
         private Browser()
         {
             driver = new DriverFactory().GetFirefoxDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(Settings.timeouts);
+            driver.Manage().Window.Size = new Size(Settings.windowSizeWidth, Settings.windowSizeHeight);
+        }
 
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeouts);
-            driver.Manage().Window.Size = new Size(windowSizeWidth, windowSizeHeight);
+        public void ReloadCurrentPage()
+        {
+            driver.Navigate().Refresh();
         }
 
         public void CloseBrowser()

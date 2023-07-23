@@ -11,7 +11,6 @@ namespace TestCases.UI
         [Test]
         [Description("Create an account")]
         [Category("UI"), Category("Account")]
-        [Order(1)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void CreateAccount()
@@ -29,7 +28,6 @@ namespace TestCases.UI
         [Test]
         [Description("Edit an account")]
         [Category("UI"), Category("Account")]
-        [Order(2)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void EditAccount()
@@ -41,7 +39,10 @@ namespace TestCases.UI
 
             try
             {
-                oldAccount = AccountsPage.TakeAccount(0).GetAccountDetails();
+                oldAccount = 
+                    AccountsPage.
+                        GoToAccountPageBySequenceNumber(0).
+                        GetAccountDetails();
             }
             catch
             {
@@ -51,7 +52,11 @@ namespace TestCases.UI
             }
 
             AccountModel newAccount = CreationHelper.CreateAccount();
-            AccountModel changedAccount = AccountPage.EditAccount(newAccount).ConfirmAccountChanges().GetAccountDetails();
+            AccountModel changedAccount = 
+                AccountPage.
+                    EditAccount(newAccount).
+                    ConfirmAccountChanges().
+                    GetAccountDetails();
 
             Assert.AreEqual(newAccount, changedAccount);
             Assert.AreNotEqual(changedAccount, oldAccount);
@@ -60,7 +65,6 @@ namespace TestCases.UI
         [Test]
         [Description("Delete an account")]
         [Category("UI"), Category("Account")]
-        [Order(3)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void DeleteAccount()
@@ -74,7 +78,10 @@ namespace TestCases.UI
             try
             {
                 countOfAccountsBefore = AccountsPage.GetAccountsNames().Count;
-                oldAccount = AccountsPage.TakeAccount(0).GetAccountDetails();
+                oldAccount = 
+                    AccountsPage.
+                        GoToAccountPageBySequenceNumber(0).
+                        GetAccountDetails();
 
                 AccountPage.DeleteAccount();
             }
@@ -87,7 +94,9 @@ namespace TestCases.UI
 
                 countOfAccountsBefore = AccountsPage.GetAccountsNames().Count;
 
-                AccountsPage.TakeAccount(0).DeleteAccount();
+                AccountsPage.
+                    GoToAccountPageBySequenceNumber(0).
+                    DeleteAccount();
             }
 
             int countOfAccountsAfter = AccountsPage.GetAccountsNames().Count;

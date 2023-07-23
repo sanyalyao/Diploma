@@ -13,7 +13,6 @@ namespace TestCases.UI
         [Test]
         [Description("Create a group")]
         [Category("UI"), Category("Group")]
-        [Order(1)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void CreateGroup()
@@ -23,7 +22,12 @@ namespace TestCases.UI
             Login().GoToSalesPage();
             GroupsPage.OpenGroupsPage();
 
-            List<string> groups = EditCreationGroupPage.CreateNewGroup(newGroup).ConfirmCreationNewGroup().OpenGroupsPage().ReloadCurrentPage().GetGroupsNames();
+            List<string> groups = 
+                EditCreationGroupPage.
+                CreateNewGroup(newGroup).
+                ConfirmCreationNewGroup().
+                OpenGroupsPage().
+                GetGroupsNames();
 
             Assert.Contains(newGroup.Name, groups);
         }
@@ -31,7 +35,6 @@ namespace TestCases.UI
         [Test]
         [Description("Delete a group")]
         [Category("UI"), Category("Group")]
-        [Order(3)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void DeleteGroup() 
@@ -40,31 +43,42 @@ namespace TestCases.UI
 
             GroupModel group = new GroupModel()
             {
-                Name = GroupsPage.OpenGroupsPage().GetGroupsNames()[0],
+                Name = 
+                GroupsPage.
+                    OpenGroupsPage().
+                    GetGroupsNames().
+                    FirstOrDefault(),
             };
 
-            GroupsPage.TakeGroup(0).DeleteGroup().ReloadCurrentPage();
+            GroupsPage.
+                GoToGroupPageByGroupName(group).
+                DeleteGroup();
 
-            Assert.IsFalse(GroupsPage.DoesGroupNameExistInTable(group));
+            Assert.IsFalse(GroupsPage.DoesGroupNameExistInGroupsTable(group));
         }
 
         [Test]
         [Description("Edit a group")]
         [Category("UI"), Category("Group")]
-        [Order(2)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void EditGroup()
         {
-            Login().GoToSalesPage();
-
-            GroupModel oldGroup = GroupsPage.OpenGroupsPage().EditGroup(0).GetGroupInfo();
             GroupModel newGroup = CreationHelper.CreateGroup(AccessTypes.Private);
 
-            EditCreationGroupPage.FillUpFields(newGroup).ConfirmGroupChanges().ReloadCurrentPage();
+            Login().GoToSalesPage();
 
-            Assert.IsFalse(GroupsPage.DoesGroupNameExistInTable(oldGroup));
-            Assert.IsTrue(GroupsPage.DoesGroupNameExistInTable(newGroup));
+            GroupModel oldGroup = 
+                GroupsPage.
+                    OpenGroupsPage().
+                    EditGroupByGroupName("Yundt Inc and Sons");
+
+            EditCreationGroupPage.
+                FillUpFields(newGroup).
+                ConfirmGroupChanges();
+
+            Assert.IsFalse(GroupsPage.DoesGroupNameExistInGroupsTable(oldGroup));
+            Assert.IsTrue(GroupsPage.DoesGroupNameExistInGroupsTable(newGroup));
         }
     }
 }

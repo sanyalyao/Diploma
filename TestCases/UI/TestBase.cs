@@ -9,12 +9,13 @@ using NUnit.Allure.Core;
 using Allure.Net.Commons;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
+using BussinesObject.UI.Steps;
 
 namespace TestCases.UI
 {
     [Parallelizable(ParallelScope.All)]
     [AllureNUnit]
-    public class TestBase : SetUpSettings
+    public class TestBase
     {
         protected static LoginPage LoginPage;
         protected AccountPage AccountPage;
@@ -27,7 +28,10 @@ namespace TestCases.UI
         protected CreationNewAccountPage CreationNewAccountPage;
         protected CreationNewContactPage CreationNewContactPage;
         protected EditCreationGroupPage EditCreationGroupPage;
+        protected EditCreationGroupPageSteps EditCreationGroupPageSteps;
+        protected CreationNewContactPageSteps CreationNewContactPageSteps;
         protected AllureLifecycle Allure;
+        protected static SetUpSettings Settings => Browser.Instance.Settings;
 
         [SetUp]
         public void SetUp()
@@ -45,6 +49,8 @@ namespace TestCases.UI
             GroupPage = new GroupPage();
             EditCreationGroupPage = new EditCreationGroupPage();
             HeadPanel = new HeadPanel();
+            EditCreationGroupPageSteps = new EditCreationGroupPageSteps();
+            CreationNewContactPageSteps = new CreationNewContactPageSteps();
         }
 
         [TearDown]

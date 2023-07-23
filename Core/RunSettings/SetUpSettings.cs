@@ -1,34 +1,28 @@
-﻿using System.Xml;
-using System.Xml.Serialization;
+﻿using NUnit.Framework;
 
 namespace Core.RunSettings
 {
     public class SetUpSettings
     {
-        protected static string baseUrl;
-        protected static string accessToken;
-        protected static string username;
-        protected static string password;
-        protected static string securityQuestion;
-        protected static int timeouts;
-        protected static int windowSizeWidth;
-        protected static int windowSizeHeight;
+        public string baseUrl;
+        public string accessToken;
+        public string username;
+        public string password;
+        public string securityQuestion;
+        public int timeouts;
+        public int windowSizeWidth;
+        public int windowSizeHeight;
 
         public SetUpSettings()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(RunSettings));
-            using (XmlReader reader = XmlReader.Create($"{Environment.CurrentDirectory}\\settings.xml"))
-            {
-                RunSettings settings = (RunSettings)serializer.Deserialize(reader);
-                accessToken = settings.TestRunParameters.Authorization.Parameter.Where(parameter => parameter.Name == "Authorization").First().Value;
-                baseUrl = settings.TestRunParameters.Authorization.Parameter.Where(parameter => parameter.Name == "Url").First().Value;
-                username = settings.TestRunParameters.Authorization.Parameter.Where(parameter => parameter.Name == "Username").First().Value;
-                password = settings.TestRunParameters.Authorization.Parameter.Where(parameter => parameter.Name == "Password").First().Value;
-                securityQuestion = settings.TestRunParameters.Authorization.Parameter.Where(parameter => parameter.Name == "SecurityQuestion").First().Value;
-                timeouts = Int32.Parse(settings.TestRunParameters.BrowserSettings.Parameter.Where(parameter => parameter.Name == "Timeouts").First().Value);
-                windowSizeWidth = Int32.Parse(settings.TestRunParameters.BrowserSettings.Parameter.Where(parameter => parameter.Name == "WindowSizeWidth").First().Value);
-                windowSizeHeight = Int32.Parse(settings.TestRunParameters.BrowserSettings.Parameter.Where(parameter => parameter.Name == "WindowSizeHeight").First().Value);
-            }
+            accessToken = TestContext.Parameters.Get("Authorization");
+            baseUrl = TestContext.Parameters.Get("Url");
+            username = TestContext.Parameters.Get("Username");
+            password = TestContext.Parameters.Get("Password");
+            securityQuestion = TestContext.Parameters.Get("SecurityQuestion");
+            timeouts = Int32.Parse(TestContext.Parameters.Get("Timeouts"));
+            windowSizeWidth = Int32.Parse(TestContext.Parameters.Get("WindowSizeWidth"));
+            windowSizeHeight = Int32.Parse(TestContext.Parameters.Get("WindowSizeHeight"));
         }
     }
 }

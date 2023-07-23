@@ -8,7 +8,7 @@ namespace BussinesObject.UI.Pages
 {
     public class LoginPage : BasePage
     {
-        private static string url = baseUrl;
+        private string url = Settings.baseUrl;
 
         private By titleHomeBy = By.CssSelector("span[class='breadcrumbDetail uiOutputText']");
 

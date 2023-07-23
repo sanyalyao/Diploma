@@ -11,7 +11,6 @@ namespace TestCases.UI
         [Test]
         [Description("Create a contact")]
         [Category("UI"), Category("Contact")]
-        [Order(1)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void CreateContact()
@@ -20,8 +19,11 @@ namespace TestCases.UI
 
             ContactModel newContact = CreationHelper.CreateContact();
 
-            ContactsPage.OpenContactsPage();
-            CreationNewContactPage.CreateNewContact(newContact).ConfirmCreationNewContact();
+            ContactsPage.
+                OpenContactsPage();
+            CreationNewContactPage.
+                CreateNewContact(newContact).
+                ConfirmCreationNewContact();
 
             Assert.AreEqual(newContact, ContactPage.GetContactDetails());
         }
@@ -29,7 +31,6 @@ namespace TestCases.UI
         [Test]
         [Description("Edit a contact")]
         [Category("UI"), Category("Contact")]
-        [Order(3)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void EditContact()
@@ -41,17 +42,26 @@ namespace TestCases.UI
 
             try
             {
-                oldContact = ContactsPage.TakeContact(0).GetContactDetails();
+                oldContact = 
+                    ContactsPage.
+                        GoToContactPageBySequenceNumber(0).
+                        GetContactDetails();
             }
             catch
             {
                 oldContact = CreationHelper.CreateContact();
 
-                CreationNewContactPage.CreateNewContact(oldContact).ConfirmCreationNewContact();
+                CreationNewContactPage.
+                    CreateNewContact(oldContact).
+                    ConfirmCreationNewContact();
             }
 
             ContactModel newContact = CreationHelper.CreateContact();
-            ContactModel changedContact = ContactPage.EditContact(newContact).ConfirmContactChanges().GetContactDetails();
+            ContactModel changedContact = 
+                ContactPage.
+                    EditContact(newContact).
+                    ConfirmContactChanges().
+                    GetContactDetails();
 
             Assert.AreEqual(newContact, changedContact);
             Assert.AreNotEqual(changedContact, oldContact);
@@ -60,7 +70,6 @@ namespace TestCases.UI
         [Test]
         [Description("Delete a contact")]
         [Category("UI"), Category("Contact")]
-        [Order(2)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void DeleteContact()
@@ -74,7 +83,10 @@ namespace TestCases.UI
             try
             {
                 countOfContactsBefore = ContactsPage.GetContactsNames().Count;
-                oldContact = ContactsPage.TakeContact(0).GetContactDetails();
+                oldContact = 
+                    ContactsPage.
+                        GoToContactPageBySequenceNumber(0).
+                        GetContactDetails();
 
                 ContactPage.DeleteContact();
             }
@@ -87,7 +99,9 @@ namespace TestCases.UI
 
                 countOfContactsBefore = ContactsPage.GetContactsNames().Count;
 
-                ContactsPage.TakeContact(0).DeleteContact();
+                ContactsPage.
+                    GoToContactPageBySequenceNumber(0).
+                    DeleteContact();
             }
 
             int countOfContactsAfter = ContactsPage.GetContactsNames().Count;

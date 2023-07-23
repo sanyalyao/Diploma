@@ -8,6 +8,8 @@ namespace BussinesObject.UI.Pages.ContactPages
 {
     public class ContactsPage : GeneralContractPage
     {
+        private By contactsNamesWithLinksBy = By.CssSelector("th[scope='row'] > span > a");
+
         private Button tabContactsButton = new Button("one-app-nav-bar-item-root", "data-id", "Contact");
 
         [AllureStep("Open contacts page")]
@@ -23,7 +25,7 @@ namespace BussinesObject.UI.Pages.ContactPages
         }
 
         [AllureStep("Go to the contact page")]
-        public ContactPage TakeContact(int sequenceNumber)
+        public ContactPage GoToContactPageBySequenceNumber(int sequenceNumber)
         {
             driver.Navigate().GoToUrl(GetContactsLinks()[sequenceNumber]);
 
@@ -34,10 +36,24 @@ namespace BussinesObject.UI.Pages.ContactPages
             return new ContactPage();
         }
 
+        [AllureStep("Go to the contact page")]
+        public ContactPage GoToContactPageByContactName(string contactName)
+        {
+            List<IWebElement> contactsNamesLinks = driver.FindElements(contactsNamesWithLinksBy).ToList();
+
+            driver.Navigate().GoToUrl(contactsNamesLinks.Where(element => element.Text.ToLower() == contactName.ToLower()).First().GetAttribute("href"));
+
+            WaitHelper.WaitElement(driver, contactNameTitleBy);
+
+            logger.Info($"Go to the contact page with name \"{contactName}\"");
+
+            return new ContactPage();
+        }
+
         [AllureStep("Check if the contact name exist in the table")]
         public bool DoesContactNameExistInTable(ContactModel contact)
         {
-            List<string> listOfContactsNames = driver.FindElements(By.CssSelector("th[scope='row'] > span > a")).Count != 0
+            List<string> listOfContactsNames = driver.FindElements(contactsNamesWithLinksBy).Count != 0
                 ? GetContactsNames()
                 : new List<string>();
 
@@ -50,7 +66,7 @@ namespace BussinesObject.UI.Pages.ContactPages
 
         public List<string> GetContactsNames()
         {
-            List<IWebElement> rows = driver.FindElements(By.CssSelector("th[scope='row'] > span > a")).ToList();
+            List<IWebElement> rows = driver.FindElements(contactsNamesWithLinksBy).ToList();
             List<string> contactsNames = new List<string>();
 
             foreach (IWebElement row in rows)
@@ -63,7 +79,7 @@ namespace BussinesObject.UI.Pages.ContactPages
 
         private List<string> GetContactsLinks()
         {
-            List<string> linksToEachContact = driver.FindElements(By.CssSelector("th[scope='row'] > span > a")).Count != 0
+            List<string> linksToEachContact = driver.FindElements(contactsNamesWithLinksBy).Count != 0
                 ? GetLinksFromTable()
                 : new List<string>();
 
@@ -72,7 +88,7 @@ namespace BussinesObject.UI.Pages.ContactPages
 
         private List<string> GetLinksFromTable()
         {
-            List<IWebElement> rows = driver.FindElements(By.CssSelector("th[scope='row'] > span > a")).ToList();
+            List<IWebElement> rows = driver.FindElements(contactsNamesWithLinksBy).ToList();
             List<string> links = new List<string>();
 
             foreach (IWebElement row in rows)

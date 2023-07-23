@@ -65,9 +65,6 @@ namespace BussinesObject.UI.Pages.ContactPages
         {
             saveNewContactButton.GetElement().Click();
 
-            logger.Info($"Check if push error exist. Is displayed error - {errorPushMessageTitle.GetElement().Displayed}");
-            logger.Info($"Error title - {errorPushMessageTitle.GetElement().Text}");
-
             return errorPushMessageTitle.GetElement();
         }
     }
