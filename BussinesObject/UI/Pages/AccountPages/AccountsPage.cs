@@ -23,7 +23,7 @@ namespace BussinesObject.UI.Pages.AccountPages
         }
 
         [AllureStep("Go to the account page")]
-        public AccountPage TakeAccount(int sequenceNumber)
+        public AccountPage GoToAccountPageBySequenceNumber(int sequenceNumber)
         {
             driver.Navigate().GoToUrl(GetAccountsLinks()[sequenceNumber]);
 

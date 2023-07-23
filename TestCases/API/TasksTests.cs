@@ -11,7 +11,6 @@ namespace TestCases.API
         [Test]
         [Description("Create a task")]
         [Category("API"), Category("Task")]
-        [Order(1)]
         [AllureSeverity(SeverityLevel.critical)]        
 
         public void CreateTask()
@@ -27,18 +26,16 @@ namespace TestCases.API
         [Test]
         [Description("Delete a task")]
         [Category("API"), Category("Task")]
-        [Order(3)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void DeleteTask() 
         {
-            taskServiceSteps.DeleteTaskSteps(taskService.GetTasks()[0]);
+            taskServiceSteps.DeleteTaskSteps(taskService.GetTasks().First());
         }
 
         [Test]
         [Description("Edit a task")]
         [Category("API"), Category("Task")]
-        [Order(2)]
         [AllureSeverity(SeverityLevel.critical)]
 
         public void EditTask()
@@ -48,7 +45,7 @@ namespace TestCases.API
                 Subject = taskService.GetSubject(Subject.SendLetter),
                 Status = taskService.GetStatus(BussinesObject.API.Models.TaskObjects.Status.Completed),
             };
-            RecentItem oldTask = taskService.GetTasks()[0];
+            RecentItem oldTask = taskService.GetTasks().First();
 
             taskServiceSteps.EditTaskSteps(oldTask, newTask);
         }

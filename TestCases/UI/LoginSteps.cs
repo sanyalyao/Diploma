@@ -7,9 +7,11 @@ namespace TestCases.UI
     {
         public static HeadPanel Login()
         {
-            UserModel user = new UserModel(username, password);
+            UserModel user = new (Settings.username, Settings.password);
 
-            LoginPage.OpenLoginPage().LogIn(user);
+            LoginPage.
+                OpenLoginPage().
+                LogIn(user);
 
             return new HeadPanel();
         }

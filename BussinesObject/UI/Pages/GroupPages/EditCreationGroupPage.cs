@@ -3,15 +3,17 @@ using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using OpenQA.Selenium;
 using NUnit.Allure.Attributes;
+using OpenQA.Selenium.Interactions;
+using System.Windows;
 
 namespace BussinesObject.UI.Pages.GroupPages
 {
-    public class EditCreationGroupPage : BasePage
+    public class EditCreationGroupPage : GeneralGroupPage
     {
         private static By groupNameFieldBy = By.CssSelector("div[data-target-selection-name='sfdc:RecordField.CollaborationGroup.Name'] *> input");
         private By groupDetailsBy = By.CssSelector("span[title='Group Details']");
         private By uploadGroupPhotoTitleBy = By.CssSelector("div[class='wizard-step active'] > div[data-aura-class=\"assistantFrameworkWizardHeader\"]");
-        private By titleOfTheGroupsPage = By.CssSelector("span[class='triggerLinkText selectedListView slds-page-header__title slds-truncate slds-p-right--xx-small uiOutputText']");
+        private By groupEditTitleBy = By.CssSelector("h2[class='inlineTitle slds-p-top--large slds-p-horizontal--medium slds-p-bottom--medium slds-text-heading--medium']");
 
         private Button newGroupButton = new Button("a","title", "New");
         private Button saveAndNextButton = new Button("button", "class", "slds-button slds-button--neutral next right slds-button--brand uiButton--brand uiButton");
@@ -36,7 +38,11 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             radioMenu.GetElement().Click();
 
-            accessTypeRadio.GetElements().Where(element => element.GetAttribute("title").Contains(newGroup.AccessType)).First().Click();
+            accessTypeRadio.GetElements().
+                Where(element => element.GetAttribute("title").
+                Contains(newGroup.AccessType)).
+                First().
+                Click();
 
             logger.Info($"Create new group. Name - {newGroup.Name}, AccessType - {newGroup.AccessType}");
 
@@ -65,9 +71,6 @@ namespace BussinesObject.UI.Pages.GroupPages
         {
             saveAndNextButton.GetElements()[0].Click();
 
-            logger.Info($"Check if push error exist. Is displayed error: {errorPushMessage.GetElement().Displayed}");
-            logger.Info($"Error text - {errorPushMessage.GetElement().Text}");
-
             return errorPushMessage.GetElement();
         }
 
@@ -95,13 +98,15 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             logger.Info("Confirm group changes");
 
+            ReloadCurrentPage(titleOfTheGroupsPage, "Recently Viewed");
+
             return new GroupsPage();
         }
 
         [AllureStep("Get information about the group")]
         public GroupModel GetGroupInfo()
         {
-            string nameGroup = driver.FindElement(groupNameFieldBy).Text;
+            string nameGroup = driver.FindElement(groupEditTitleBy).Text.Replace("Edit","").Trim();
             string accessType = radioMenu.GetElement().Text;
 
             GroupModel group = new GroupModel()

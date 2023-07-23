@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using BussinesObject.UI.Pages.ContactPages;
-using OpenQA.Selenium;
 using BussinesObject.UI.Models;
 using BussinesObject.UI.Helpers;
 using Allure.Net.Commons;
@@ -22,11 +21,8 @@ namespace TestCases.UI.NegativeTests
 
             Login().GoToSalesPage();
             ContactsPage.OpenContactsPage();
-
-            IWebElement error = CreationNewContactPage.CreateNewContact(newContact).CheckIfErrorExist();
-
-            Assert.IsTrue(error.Displayed);
-            Assert.AreEqual("We hit a snag.", error.Text);
+            CreationNewContactPage.CreateNewContact(newContact);
+            CreationNewContactPageSteps.CheckIfErrorExistByTitle("We hit a snag.");
         }
 
         [Test]
@@ -41,10 +37,12 @@ namespace TestCases.UI.NegativeTests
             ContactModel newContact = CreationHelper.CreateContact();
             newContact.LastName = string.Empty;
 
-            IWebElement error = ContactsPage.OpenContactsPage().TakeContact(0).EditContact(newContact).ConfirmContactChanges().CheckIfErrorExist();
-
-            Assert.IsTrue(error.Displayed);
-            Assert.AreEqual("We hit a snag.", error.Text);
+            ContactsPage.
+                OpenContactsPage().
+                GoToContactPageByContactName("Diego O'Reilly").
+                EditContact(newContact).
+                ConfirmContactChanges();
+            CreationNewContactPageSteps.CheckIfErrorExistByTitle("We hit a snag.");
         }
     }
 }

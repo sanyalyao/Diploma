@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace BussinesObject.UI.Pages.GroupPages
 {
-    public class GroupPage : BasePage
+    public class GroupPage : GeneralGroupPage
     {
         private By nameOfFirstColumnTableBy = By.CssSelector("th[aria-label='Name']");
 
@@ -23,6 +23,8 @@ namespace BussinesObject.UI.Pages.GroupPages
             WaitHelper.WaitElement(driver, nameOfFirstColumnTableBy);
 
             logger.Info("Delete special group");
+
+            ReloadCurrentPage(titleOfTheGroupsPage, "Recently Viewed");
 
             return new GroupsPage();
         }
