@@ -27,7 +27,7 @@ steps:
     solution: '**\*.sln'
     vsVersion: '17.0'
     platform: 'Any CPU'
-    configuration: '$(BuildConfiguration)'
+    configuration: 'debug'
 
 - task: VSTest@3
   displayName: 'Run tests'
