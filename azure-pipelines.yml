@@ -10,10 +10,10 @@ pool:
   vmImage: 'MyAgent'
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: 'Install nuget 6.x'
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 6.x'
   inputs:
-    versionSpec: '6.x'
+    versionSpec: 6.x
 
 - task: NuGetCommand@2
   displayName: 'Restore nuget package for solution'
@@ -27,7 +27,16 @@ steps:
     command: 'build'
     arguments: '--configuration Debug'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run Tests'
+- task: VSTest@3
   inputs:
-    command: 'test'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: '**\TestCases.dll'
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+    testFiltercriteria: '/TestCaseFilter:"FullyQualifiedName=TestCases.UI.GroupTests|FullyQualifiedName=TestCases.UI.NegativeTests|FullyQualifiedName=TestCases.API.TasksTests”'
+    runSettingsFile: 'Core/RunSettings/settings.runsettings'
+    overrideTestrunParameters: '-Authorization 00D8e000000RWWC!AQgAQBzXwnnqaAoL.dUT4MY0.Tmsnnen4BBwiGELMd5.qiUMiAyNCYu7.k46JLqKUxVU0wyL8nuVeLOMOM5utAdIqOUQlLFf'
+    runTestsInIsolation: true
+    testRunTitle: 'Test running'
+    platform: 'Building platform'
+    configuration: 'Building configuration'
+    publishRunAttachments: false
