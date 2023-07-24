@@ -21,11 +21,13 @@ steps:
     command: 'restore'
     restoreSolution: '$(solution)'
 
-- task: DotNetCoreCLI@2
+- task: VSBuild@1
   displayName: 'Build solution'
   inputs:
-    command: 'build'
-    arguments: '--configuration Debug'
+    solution: 'Build solution **\*.sln'
+    vsVersion: '17.0'
+    platform: 'any cpu'
+    configuration: '$(BuildConfiguration)'
 
 - task: VSTest@3
   displayName: 'Run tests'
