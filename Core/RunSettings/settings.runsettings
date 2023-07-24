@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	<TestRunParameters>
+		<Parameter name="Authorization" value="00D8e000000RWWC!AQgAQAHJGf198GeuONN3c9Xq9lC0Az7NiHThSk2mK9hmAiCeimQM65_hVyJ9Xh4wEUb9a6faFHfAKB9RTVsG4R5u6fsywA_G" />
+		<Parameter name="Url" value="https://ozatvn2-dev-ed.develop.my.salesforce.com" />
+		<Parameter name="Username" value="gopad74116@onlcool.com" />
+		<Parameter name="Password" value="gerUHY456"/>
+		<Parameter name="SecurityQuestion" value="gerwrht"/>
+		<Parameter name="WindowSizeWidth" value="1920"/>
+		<Parameter name="WindowSizeHeight" value="1080"/>
+		<Parameter name="Timeouts" value="5"/>
+	</TestRunParameters>
+</RunSettings>
