@@ -28,6 +28,7 @@ steps:
     arguments: '--configuration Debug'
 
 - task: VSTest@3
+  displayName: 'Run tests'
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: '**\TestCases.dll'
@@ -35,7 +36,4 @@ steps:
     testFiltercriteria: '/TestCaseFilter:"FullyQualifiedName=TestCases.UI.GroupTests|FullyQualifiedName=TestCases.UI.NegativeTests|FullyQualifiedName=TestCases.API.TasksTests”'
     runSettingsFile: 'Core/RunSettings/settings.runsettings'
     overrideTestrunParameters: '-Authorization 00D8e000000RWWC!AQgAQBzXwnnqaAoL.dUT4MY0.Tmsnnen4BBwiGELMd5.qiUMiAyNCYu7.k46JLqKUxVU0wyL8nuVeLOMOM5utAdIqOUQlLFf'
-    testRunTitle: 'Test running'
-    platform: 'Building platform'
-    configuration: 'Building configuration'
     publishRunAttachments: false
