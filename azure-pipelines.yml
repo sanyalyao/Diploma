@@ -38,4 +38,4 @@ steps:
     testFiltercriteria: 'FullyQualifiedName=TestCases.API.TasksTests|FullyQualifiedName=TestCases.UI.NegativeTests|FullyQualifiedName=TestCases.UI.GroupTests'
     vsTestVersion: '17.0'
     runSettingsFile: 'Core/RunSettings/settings.runsettings'
-    overrideTestrunParameters: '-Authorization 00D8e000000RWWC!AQgAQH3ze8fvFZAN7esUdtT4_taZpr4jup0sO1DDU32xYch588YLxGT8oHjiaZtpdoeYgTkjZL_hiJXAzc9xP.g8.ITTcOkR'
+    overrideTestrunParameters: '-Authorization ${token}'
