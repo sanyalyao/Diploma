@@ -39,7 +39,7 @@ namespace TestCases.UI.NegativeTests
 
             ContactsPage.
                 OpenContactsPage().
-                GoToContactPageByContactName("Diego O'Reilly").
+                GoToContactPageBySequenceNumber(0).
                 EditContact(newContact).
                 ConfirmContactChanges();
             CreationNewContactPageSteps.CheckIfErrorExistByTitle("We hit a snag.");
