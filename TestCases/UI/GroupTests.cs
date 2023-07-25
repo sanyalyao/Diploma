@@ -71,7 +71,7 @@ namespace TestCases.UI
             GroupModel oldGroup = 
                 GroupsPage.
                     OpenGroupsPage().
-                    EditGroupByGroupName("Yundt Inc and Sons");
+                    EditGroupBySequenceNumber(0);
 
             EditCreationGroupPage.
                 FillUpFields(newGroup).
