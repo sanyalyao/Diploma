@@ -87,7 +87,7 @@ namespace BussinesObject.UI.Pages.GroupPages
         }
 
         [AllureStep("Edit a group")]
-        public EditCreationGroupPage EditGroupBySequenceNumber(int sequenceNumber)
+        public GroupModel EditGroupBySequenceNumber(int sequenceNumber)
         {
             editGroupButton.GetElements()[sequenceNumber].Click();
             goToEditPageButton.GetElement().Click();
@@ -96,7 +96,7 @@ namespace BussinesObject.UI.Pages.GroupPages
 
             logger.Info($"Edit a group from the row {sequenceNumber + 1}");
 
-            return new EditCreationGroupPage();
+            return new EditCreationGroupPage().GetGroupInfo();
         }
 
         [AllureStep("Edit a group")]
