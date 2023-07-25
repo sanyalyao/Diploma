@@ -35,7 +35,7 @@ steps:
     testAssemblyVer2: '**\TestCases.dll'
     testFiltercriteria: '/TestCaseFilter:"FullyQualifiedName=TestCases.UI.GroupTests|FullyQualifiedName=TestCases.UI.NegativeTests|FullyQualifiedName=TestCases.API.TasksTests”'
     runSettingsFile: Core/RunSettings/settings.runsettings
-    overrideTestrunParameters: '-Authorization 00D8e000000RWWC!AQgAQBzXwnnqaAoL.dUT4MY0.Tmsnnen4BBwiGELMd5.qiUMiAyNCYu7.k46JLqKUxVU0wyL8nuVeLOMOM5utAdIqOUQlLFf'
+    overrideTestrunParameters: '-Authorization 00D8e000000RWWC!AQgAQH3ze8fvFZAN7esUdtT4_taZpr4jup0sO1DDU32xYch588YLxGT8oHjiaZtpdoeYgTkjZL_hiJXAzc9xP.g8.ITTcOkR'
     testRunTitle: 'Tests is running'
     platform: 'Building platform'
     configuration: 'Building configuration'
