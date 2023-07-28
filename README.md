@@ -125,3 +125,45 @@ allure serve
 ```
 
 After that a browser opens allure page with tests results
+
+
+# Checklist
+
+Checklist is a set of ideas [for test cases]. The last phrase is bracketed, for a reason, because in general a checklist is just a collection of ideas: ideas for
+testing, ideas for development, ideas for planning and management — in other
+words, a collection of any ideas.
+#
+TasksTests - Checking task creation, deleting and editing
+|Test name|Description|
+|---------|-----------|
+|**CreateTask**|Creates one task and checks result via **taskServiceSteps.CreateNewTaskSteps**| 
+|**DeleteTask**|Deletes the first task from the tasks list via **taskServiceSteps.DeleteTaskSteps**|
+|**EditTask**|Edits the first task from the tasks list via **taskServiceSteps.EditTaskSteps**|
+
+**taskServiceSteps.CreateNewTaskSteps** - checks task ID in tasks list and success response is or not
+
+**taskServiceSteps.DeleteTaskSteps** - checks how many tasks there are and success response is or not
+
+**taskServiceSteps.EditTaskSteps** - checks success response is or not
+#
+GroupTests - Checking group creation, deleting and editing
+|Test name|Description|
+|---------|-----------|
+|**CreateGroup**|Creates one group and checks if groups list contains new group|
+|**DeleteGroup**|Deletes the first group from groups list and checks if groups list does not contain that group|
+|**EditGroup**|Edits the first group from groups list and checks if groups list contains the group with the new name and does not contain the group with the old name|
+
+**EditCreationGroupPage** - contains methods for creation new group, editing a group, getting information about a group, checking if error exists
+
+**GroupsPage** - contains methods for opening the page with groups, checking if groups table contains a group's name, opening a group's page by sequence number or by group's name, editing a group by sequence number or by group's name and getting groups' names
+
+**GroupPage** - contains methods for deleting a group
+#
+Negative tests - Checking errors of creation new objects and editing an objects
+|Test name|Description|
+|---------|-----------|
+|**CreateContactWithoutLastName**|Checkes a negative push message when the last name is not filled up. Checks if error exist by error's title|
+|**EditContact**|Deletes last name of the contact and try to save changes. Checks if error exist by error's title|
+|**CreateGroupWithoutName**|Checkes a negative push message when a name is not filled up and access type is chosen. Checks if error exist by error's text|
+|**CreateGroupWithoutAccessType**|Checkes a negative push message when a name is filled up and access type is not chosen. Checks if error exist by error's text|
+|**CreateGroupWithEmptyFields**|Checkes a negative push message when a name is not filled up and access type is not chosen. Checks if error exist by error's text|
