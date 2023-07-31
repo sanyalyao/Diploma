@@ -33,7 +33,10 @@ steps:
   displayName: 'Run tests'
   inputs:
     testSelector: 'testAssemblies'
-    testAssemblyVer2: '**\TestCases.dll'
+    testAssemblyVer2: |
+      **\*TestCases*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
     testFiltercriteria: 'FullyQualifiedName=TestCases.API.TasksTests|FullyQualifiedName=TestCases.UI.NegativeTests|FullyQualifiedName=TestCases.UI.GroupTests'
     vsTestVersion: '17.0'
